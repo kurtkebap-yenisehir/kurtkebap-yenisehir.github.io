@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
+import { parsePrice, formatAmount } from '../../assets/shared.js';
 
 const original = JSON.parse(readFileSync(new URL('../../menu.json', import.meta.url), 'utf8'));
+const originalPrice = (name) => parsePrice(Object.values(original).flat().find(product => product.isim === name).fiyat);
 const copy = (value) => JSON.parse(JSON.stringify(value));
 const DRAFT = 'kurt-kebap-menu-draft-v1';
 const API = 'https://api.github.com/repos/emrekrt221-ship-it/qr_menu';
@@ -87,7 +89,8 @@ async function mockGitHub(page, options = {}) {
   return state;
 }
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, context }) => {
+  await context.route('**/menu.json*', (route) => route.fulfill({ json: original }));
   await page.route('https://images.unsplash.com/**', (route) => route.abort());
 });
 
@@ -105,7 +108,7 @@ test('offline price edit restores its draft and preview without changing the liv
   await expect(preview.locator('.product-card').filter({ hasText: 'Patlıcan Kebabı' }).locator('.product-price')).toContainText('375,5');
   const live = await context.newPage();
   await live.goto('/');
-  await expect(live.locator('.product-card').filter({ hasText: 'Patlıcan Kebabı' }).locator('.product-price')).toHaveText('350₺');
+  await expect(live.locator('.product-card').filter({ hasText: 'Patlıcan Kebabı' }).locator('.product-price')).toHaveText(`${formatAmount(originalPrice('Patlıcan Kebabı'))}₺`);
 });
 
 test('category bulk changes apply to hidden products, and hiding is reflected only in preview', async ({ page }) => {
@@ -118,14 +121,14 @@ test('category bulk changes apply to hidden products, and hiding is reflected on
   await page.locator('#bulk-value').fill('5');
   await page.getByRole('button', { name: 'Fiyatları uygula' }).click();
   await expect(page.locator('#notice')).toContainText('8 ürünün fiyatı');
-  await expect(page.getByRole('textbox', { name: 'Kutu Kola fiyatı (TL)', exact: true })).toHaveValue('55');
-  await expect(page.getByRole('textbox', { name: 'Et Hamburger fiyatı (TL)', exact: true })).toHaveValue('230');
+  await expect(page.getByRole('textbox', { name: 'Kutu Kola fiyatı (TL)', exact: true })).toHaveValue(formatAmount(originalPrice('Kutu Kola') + 5));
+  await expect(page.getByRole('textbox', { name: 'Et Hamburger fiyatı (TL)', exact: true })).toHaveValue(formatAmount(originalPrice('Et Hamburger')));
   await page.locator('#preview-button').click();
   const preview = page.frameLocator('#preview-frame');
   await preview.getByRole('button', { name: 'İçecekler', exact: true }).click();
   await expect(preview.locator('.product-card')).toHaveCount(7);
   await expect(preview.getByRole('heading', { name: 'Kutu Kola', exact: true })).toHaveCount(0);
-  await expect(preview.locator('.product-card').filter({ hasText: 'Küçük Ayran' }).locator('.product-price')).toHaveText('25₺');
+  await expect(preview.locator('.product-card').filter({ hasText: 'Küçük Ayran' }).locator('.product-price')).toHaveText(`${formatAmount(originalPrice('Küçük Ayran') + 5)}₺`);
 });
 
 test('new products can be added and moved between categories, with invalid prices rejected', async ({ page }) => {

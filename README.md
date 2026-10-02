@@ -1,5 +1,13 @@
 # Kurt Kebap Yenişehir — QR Menü
 
+Müşteri adresi: https://kurtkebap-yenisehir.github.io/
+
+Yönetim paneli: https://kurtkebap-yenisehir.github.io/admin.html
+
+Bu depo işletme adresindeki tasarımı yayınlar. Güncel ürünler, fiyatlar ve yüklenen fotoğraflar `emrekrt221-ship-it/qr_menu` deposunda tutulur; müşteri menüsü onları doğrudan mevcut GitHub Pages yayınından okur. Böylece mevcut erişim anahtarı ve eski yönetim paneli kullanılmaya devam eder. Bu depodaki `menu.json` ve `images/` dosyaları ilk kurulum kopyasıdır; fiyat ve fotoğraf değişikliklerini yönetim panelinden yapın. Veri adresi `assets/shared.js` içindeki `DATA_BASE_URL` ile tanımlanır.
+
+Eski müşteri adresi yeni işletme adresine yönlendirilir. Eski yönetim panelindeki taslak önizleme çalışmaya devam eder. Bu depoda GitHub Pages kaynağı **main → /(root)** olmalıdır.
+
 Telefonda ve bilgisayarda çalışan kategori filtreli, aranabilir bir menü ve GitHub üzerinden ürün yönetimi. Mevcut `menu.json` ürünleri ve `images/` fotoğrafları korunur. Sunucu, veritabanı veya ücretli yönetim hizmeti gerekmez.
 
 - Müşteri menüsü: `index.html`
@@ -43,7 +51,7 @@ API işlemleri [GitHub Git database](https://docs.github.com/en/rest/git) uçlar
 
 ## Yayınlama
 
-GitHub Pages ayarlarında **Deploy from a branch → main → /(root)** kullanılabilir. Depo farklı bir branch kullanacaksa `assets/shared.js` içindeki `BRANCH` ve `REPOSITORY` sabitlerini uygun biçimde değiştirin. QR kod müşteri menüsünün aynı adresine yöneliyorsa yeniden basılması gerekmez.
+GitHub Pages ayarlarında **Deploy from a branch → main → /(root)** kullanılır. `assets/shared.js` içindeki `BRANCH` ve `REPOSITORY` yönetim panelinin yazdığı merkezi veri deposunu belirtir; işletme adresine geçişte mevcut anahtarı korumak için değiştirilmez. Eski QR kod müşteri menüsünün önceki adresine yöneliyorsa yönlendirme sayesinde yeniden basılması gerekmez. Yeni QR kod için `https://kurtkebap-yenisehir.github.io/` kullanılır.
 
 Ürün yönetimi yalnızca menü verisi ve yeni fotoğrafları yazar; tasarım kodunu değiştirmez. Yönetim ekranındaki başarı mesajı GitHub commit kaydını doğrular, Pages dağıtımının bittiğini doğrulamaz.
 

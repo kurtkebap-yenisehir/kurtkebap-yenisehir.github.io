@@ -1,5 +1,8 @@
 export const REPOSITORY = 'emrekrt221-ship-it/qr_menu';
 export const BRANCH = 'main';
+// Existing management remains the single source for prices and uploaded photos.
+export const DATA_BASE_URL = 'https://emrekrt221-ship-it.github.io/qr_menu/';
+export const MENU_URL = new URL('menu.json', DATA_BASE_URL).href;
 export const DRAFT_KEY = 'kurt-kebap-menu-draft-v1';
 export const PREVIEW_KEY = 'kurt-kebap-menu-preview-v1';
 export const categoryOrder = ['Kebaplar', 'Porsiyonlar', 'Dürümler', 'Hamburgerler', 'Mezeler', 'İçecekler'];
@@ -29,7 +32,7 @@ export function priceString(price) { return `${formatAmount(price)} TL`; }
 export function normalizeSearch(value) { return value.toLocaleLowerCase('tr-TR').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ı/g, 'i'); }
 export function safeImage(value) {
   if (typeof value !== 'string' || !value.trim()) return 'assets/mark.svg';
-  if (/^images\/[\p{L}\p{N} _().-]+\.(?:png|jpe?g|webp|avif)$/iu.test(value)) return value;
+  if (/^images\/[\p{L}\p{N} _().-]+\.(?:png|jpe?g|webp|avif)$/iu.test(value)) return new URL(value, DATA_BASE_URL).href;
   try { const url = new URL(value); if (url.protocol === 'https:') return url.href; } catch { /* Invalid images fall back to the brand mark. */ }
   return 'assets/mark.svg';
 }

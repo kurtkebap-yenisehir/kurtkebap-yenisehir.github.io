@@ -1,4 +1,4 @@
-import { validateMenu, sortedCategories, categoryDescriptions, normalizeSearch, createProductCard, PREVIEW_KEY } from './shared.js';
+import { validateMenu, sortedCategories, categoryDescriptions, normalizeSearch, createProductCard, PREVIEW_KEY, MENU_URL } from './shared.js';
 const nav = document.querySelector('#categories');
 const grid = document.querySelector('#menu-grid');
 const status = document.querySelector('#menu-status');
@@ -46,7 +46,7 @@ async function loadMenu() {
       previewImages = draft.images || {};
       document.querySelector('#preview-banner').hidden = false;
     } else {
-      const response = await fetch('menu.json', { cache: 'no-store' });
+      const response = await fetch(MENU_URL, { cache: 'no-store' });
       if (!response.ok) throw new Error('Menü yüklenemedi.');
       data = await response.json();
     }

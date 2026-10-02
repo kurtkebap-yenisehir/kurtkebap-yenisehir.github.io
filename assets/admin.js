@@ -1,4 +1,4 @@
-import { REPOSITORY, BRANCH, DRAFT_KEY, PREVIEW_KEY, validateMenu, sortedCategories, parsePrice, formatAmount, priceString, safeImage, normalizeSearch } from './shared.js';
+import { REPOSITORY, BRANCH, DRAFT_KEY, PREVIEW_KEY, validateMenu, sortedCategories, parsePrice, formatAmount, priceString, safeImage, normalizeSearch, MENU_URL } from './shared.js';
 
 const $ = (id) => document.getElementById(id);
 const clone = (value) => JSON.parse(JSON.stringify(value));
@@ -594,7 +594,7 @@ async function init() {
     }
     if (!recovered || (!isDirty() && !rawPrices.size && !pendingPublish)) {
       try {
-        const response = await fetch(`menu.json?t=${Date.now()}`, { cache: 'no-store' });
+        const response = await fetch(`${MENU_URL}?t=${Date.now()}`, { cache: 'no-store' });
         if (!response.ok) throw new Error('Menü dosyası yüklenemedi. Sayfayı yenileyin veya GitHub\'a bağlanın.');
         const data = await response.json();
         validateMenu(data);
