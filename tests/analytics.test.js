@@ -85,7 +85,7 @@ test('both pages label existing links without changing their destination', async
     for (const label of labels) assert.ok(Object.hasOwn(EVENT_LABELS, label));
     for (const label of ['menu_open', 'order_open', 'trendyol_click', 'migros_click', 'yemeksepeti_click', 'phone_click']) assert.ok(labels.includes(label));
     assert.match(html, /href="tel:\+905319640123" data-track="phone_click"/);
-    assert.match(html, /src="assets\/analytics.js"/);
+    assert.match(html, /src="assets\/analytics.js\?v=2"/);
     assert.doesNotMatch(html, /analytics-consent|analytics-notice|analytics-preferences/);
   }
 });
