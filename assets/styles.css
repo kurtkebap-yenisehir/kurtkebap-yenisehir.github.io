@@ -50,7 +50,14 @@ h1 em { color: var(--accent); font-weight: 500; }
 .order-heading h2 { margin: 0; font-family: var(--serif); font-size: 31px; font-weight: 500; line-height: 1.3; letter-spacing: -.7px; color: var(--ink); }
 .order-phone { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-size: 13px; font-weight: 700; }
 .order-phone:hover { text-decoration: underline; text-underline-offset: 4px; }
-.order-platforms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.order-disclosure { min-width: 0; }
+.order-summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: min(390px, 100%); min-height: 60px; padding: 17px 21px; background: var(--ink); color: var(--paper); border: 1px solid var(--ink); cursor: pointer; list-style: none; font-size: 14px; font-weight: 700; -webkit-tap-highlight-color: transparent; }
+.order-summary::-webkit-details-marker { display: none; } .order-summary::marker { content: ''; }
+.order-summary:hover { background: #365541; }
+.order-chevron { flex-shrink: 0; }
+.order-disclosure[open] > .order-summary .order-chevron { transform: rotate(180deg); }
+.order-disclosure:not([open]) > .order-platforms { display: none; }
+.order-platforms { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 12px; }
 .order-platform { display: flex; align-items: center; gap: 12px; min-width: 0; min-height: 66px; padding: 16px 20px; background: #fbf9f3; border: 1px solid var(--line); color: var(--ink); font-size: 13px; font-weight: 700; }
 .order-platform:hover { background: #eeeee3; border-color: #9da78f; }
 .order-platform > svg { margin-left: auto; flex-shrink: 0; }
