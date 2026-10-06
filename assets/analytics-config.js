@@ -1,6 +1,9 @@
-// Set these two public values after creating the business Supabase project.
+// These values are public. Publish this configuration after enabling the collector and owner account.
 // Never place a secret/service-role key or a GitHub access token here.
-export const ANALYTICS_CONFIG = Object.freeze({ url: '', publishableKey: '' });
+export const ANALYTICS_CONFIG = Object.freeze({
+  url: 'https://loopwgeevnowvycojcss.supabase.co',
+  publishableKey: 'sb_publishable_iIaZBadLOFE2I4dvURtq9w_z-oYOyw8',
+});
 
 function anonPayload(key) {
   try {

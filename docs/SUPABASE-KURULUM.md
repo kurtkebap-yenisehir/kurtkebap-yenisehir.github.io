@@ -1,16 +1,18 @@
 # İstatistikleri Supabase'e bağlama
 
-Bu kurulum yalnızca ziyaret ve buton ölçümleri içindir. Fiyatlar ve ürün fotoğrafları mevcut GitHub sistemiyle kaydedilmeye devam eder. İstatistik ekranına işletmenin Supabase e-posta/şifre hesabıyla girilir; GitHub erişim anahtarı bu servise gönderilmez.
+Bu kurulum yalnızca ziyaret ve buton ölçümleri içindir. Fiyatlar ve ürün fotoğrafları mevcut GitHub sistemiyle kaydedilmeye devam eder. İstatistik ekranına **bu proje için oluşturulan uygulama kullanıcısının e-posta ve şifresiyle** girilir. Supabase Dashboard hesabınızın parolası veya GitHub erişim anahtarı bu giriş için kullanılmaz.
 
-İşletme projesi `loopwgeevnowvycojcss` kimliğiyle oluşturuldu. Aşağıdaki servis, işletmeci hesabı ve site bağlantıları tamamlandıktan sonra veriler birikir. Önceki ziyaretler geriye dönük hesaplanamaz.
+**6 Ekim 2026 kurulum durumu:** İstatistik sistemi `loopwgeevnowvycojcss` projesine bağlıdır. Veritabanı şeması, `menu-analytics` servisi, yetkili işletmeci hesabı ve sitenin açık bağlantı bilgileri kurulmuştur. Yalnızca bu servisin **Verify JWT** kontrolü kapalıdır; rapor erişimi fonksiyon içinde Supabase oturumu ve `private.admins` listesiyle doğrulanır. İzin veren ziyaretçilerin yeni kayıtları ölçülür; eski ziyaretler geriye dönük hesaplanamaz.
 
-## 1. İşletme projesini açın
+Günlük kullanım için yönetim panelindeki **İstatistikler** bağlantısını veya [istatistik ekranını](https://kurtkebap-yenisehir.github.io/istatistikler.html) açın, uygulama hesabınızla giriş yapıp **Bugün / Son 7 gün / Son 30 gün** dönemlerinden birini seçin. İlk kayıtlar gelene kadar sıfır görünmesi normaldir. Aşağıdaki adımlar yeniden kurulum ve bakım için saklanmıştır.
 
-[Supabase Dashboard](https://supabase.com/dashboard) üzerinden **New project** seçin. Proje adı olarak `kurt-kebap-istatistik` kullanılabilir. Size uygun planı ve yakın bir bölgeyi seçin; veritabanı şifresini parola yöneticinizde saklayın. Şifreyi, servis anahtarını veya Supabase hesap parolanızı sohbete göndermeyin.
+## 1. İşletme projesinin bilgileri
+
+[Mevcut işletme projesini açın](https://supabase.com/dashboard/project/loopwgeevnowvycojcss). Bu kurulum için yeni bir proje oluşturmak gerekmez. Veritabanı şifresini parola yöneticinizde saklayın; şifreyi, servis anahtarını veya Supabase hesap parolanızı sohbete göndermeyin.
 
 Proje hazır olunca iki açık yapılandırma bilgisini alın:
 
-- **Project URL:** `https://PROJE_KIMLIGI.supabase.co`
+- **Project URL:** `https://loopwgeevnowvycojcss.supabase.co`
 - **Publishable key:** `sb_publishable_...` (ya da **Legacy anon key**)
 
 Project URL ve publishable/anon anahtarı tarayıcıda kullanılabilir; paylaşılması gereken bilgiler bunlardır. **Secret key / service_role** anahtarı tarayıcıya, GitHub dosyasına veya sohbete konulmaz. [API anahtarları rehberi](https://supabase.com/docs/guides/api/api-keys)
@@ -47,16 +49,18 @@ Servisin adı **`menu-analytics`** olmalıdır. Kod dosyaları:
 - `supabase/functions/menu-analytics/validation.mjs`
 - `supabase/config.toml`
 
-Yerel dosyalardan Supabase CLI ile yayınlama yolu, depo klasöründe:
+İlk kurulumda Dashboard editörü için `index.ts` ve `validation.mjs` içerikleri tek bir `index.ts` dosyasında birleştirildi. Depodaki iki ayrı kaynak dosya bu işlemin güncellenebilir asıl sürümüdür.
+
+**Sonraki güncellemelerde iki kaynak dosyasını Supabase CLI ile birlikte yayınlayın.** CLI, `index.ts` içindeki import üzerinden `validation.mjs` dosyasını da pakete ekler. Depo klasöründe:
 
 ```powershell
 npx supabase@latest login
-npx supabase@latest functions deploy menu-analytics --project-ref PROJE_KIMLIGI
+npx supabase@latest functions deploy menu-analytics --project-ref loopwgeevnowvycojcss
 ```
 
-`PROJE_KIMLIGI` yerine Dashboard proje adresinde veya Project URL'de görülen gerçek kimliği yazın. Giriş işleminde açılan tarayıcıyla kendi Supabase hesabınızı kullanın; erişim belirtecinizi paylaşmayın. [CLI ile yayınlama](https://supabase.com/docs/guides/functions/deploy)
+Bu komut mevcut işletme projesine yayınlar. Giriş işleminde açılan tarayıcıyla kendi Supabase hesabınızı kullanın; erişim belirtecinizi paylaşmayın. [CLI ile yayınlama](https://supabase.com/docs/guides/functions/deploy)
 
-CLI kullanmadan Dashboard **Edge Functions** editöründe aynı adla yeni servis açılabilir; `index.ts` ve onun yanına `validation.mjs` dosyası birlikte eklenmelidir. [Dashboard ile oluşturma](https://supabase.com/docs/guides/functions/quickstart-dashboard)
+Dashboard üzerinden güncelleme yapılacaksa iki güncel dosya yeniden birleştirilmelidir; tek dosyalı sürümde yerel `./validation.mjs` importu kalmamalıdır. Depodaki `index.ts` dosyasını tek başına mevcut Dashboard editörüne yapıştırmayın: doğrulama dosyası olmadan çalışmaz. Alternatif olarak editör destekliyorsa iki ayrı dosya birlikte eklenebilir. [Dashboard ile oluşturma](https://supabase.com/docs/guides/functions/quickstart-dashboard)
 
 **Yalnızca bu yeni `menu-analytics` servisi** için **Verify JWT** kapalı olmalıdır; depodaki `supabase/config.toml` bunu belirtir. Bu ayar müşteri ziyaret kaydının giriş gerektirmemesi içindir. Rapor isteği fonksiyonun içinde `auth.getUser(access_token)` ile doğrulanır ve `private.admins` kontrolünden geçer. Mevcut başka fonksiyonların JWT ayarını değiştirmeyin. [Fonksiyon yapılandırması](https://supabase.com/docs/guides/functions/function-configuration), [getUser ile doğrulama](https://supabase.com/docs/reference/javascript/auth-getuser)
 
@@ -64,7 +68,7 @@ Supabase, `SUPABASE_URL` ve sunucu anahtarını Edge Function'a otomatik verir. 
 
 ## 5. Siteye açık bağlantı bilgilerini ekleyin
 
-`assets/analytics-config.js` dosyasındaki açık bağlantı bilgilerini doldurun:
+Mevcut işletme için `assets/analytics-config.js` dosyasındaki açık bağlantı bilgileri doldurulmuştur. Yeni bir projeye geçerken Project URL ve açık anahtarı birlikte değiştirin; aşağıdaki değerler yer tutucu örnektir:
 
 ```js
 export const ANALYTICS_CONFIG = {
@@ -78,7 +82,7 @@ Gerçek Project URL ve publishable anahtarı (ya da legacy anon anahtarı) kulla
 Müşteri kayıt ve rapor uç adresi:
 
 ```text
-https://PROJE_KIMLIGI.supabase.co/functions/v1/menu-analytics
+https://loopwgeevnowvycojcss.supabase.co/functions/v1/menu-analytics
 ```
 
 Yayın sonrası ortak QR sayfasını açın, bir sipariş platformuna tıklayın ve yönetim panelinin **İstatistikler** bağlantısından `istatistikler.html` ekranında işletme hesabınızla giriş yapın. Bugün raporunda kaydı kontrol edin. Bu kontrol dışında canlı menüye test fiyatı/fotoğrafı yazmak gerekmez.

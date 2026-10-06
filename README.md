@@ -57,11 +57,11 @@ GitHub Pages ayarlarında **Deploy from a branch → main → /(root)** kullanı
 
 ## Ziyaret ve buton istatistikleri
 
-Yönetim ekranındaki **İstatistikler** bağlantısı `istatistikler.html` bölümünü açar. Bu bölüm işletme için tanımlanan Supabase uygulama kullanıcısının e-posta ve şifresiyle çalışır. Supabase hesabına giriş ile istatistik uygulamasına giriş ayrı hesaplardır. GitHub erişim anahtarı fiyat ve fotoğraf yayını içindir; istatistik servisine gönderilmez.
+Yönetim ekranındaki **İstatistikler** bağlantısı veya [istatistik ekranı](https://kurtkebap-yenisehir.github.io/istatistikler.html) raporları açar. **Bu proje için oluşturulan uygulama kullanıcısının e-posta ve şifresiyle giriş yapın.** Supabase Dashboard hesabı ile istatistik uygulamasının giriş hesabı ayrıdır. GitHub erişim anahtarı fiyat ve fotoğraf yayını içindir; istatistik servisine gönderilmez.
 
 Bugün, son 7 gün ve son 30 gün için tekil tarayıcılar, ziyaret oturumları, sayfa görüntülenmeleri ve buton etkileşimleri gösterilir. Menü, sipariş seçenekleri, üç sipariş platformu, Google yorum, Instagram ve telefon ayrı ölçülür. Tekil tarayıcılar kesin kişi sayısı değildir; sipariş bağlantısına tıklama tamamlanan sipariş sayısı değildir.
 
-Supabase projesini bağlamak için [kurulum rehberini](docs/SUPABASE-KURULUM.md) izleyin. `assets/analytics-config.js` içindeki Project URL ve publishable/anon anahtarı boşken ölçüm tamamen pasiftir. Servis ve yönetici hesabı kurulmadan bu alanları etkinleştirmeyin. Secret/service_role anahtarı site dosyalarına konmaz.
+İşletme projesi `loopwgeevnowvycojcss` ve sitenin açık bağlantı bilgileri kurulmuştur. Ölçümler yalnızca kurulumdan sonraki izinli ziyaretlerden oluşur; geçmiş trafik geriye dönük alınamaz. İlk kayıtlar gelene kadar raporlar sıfır gösterebilir. Kurulum ve servis güncellemeleri için [Supabase rehberini](docs/SUPABASE-KURULUM.md) kullanın. `assets/analytics-config.js` yalnızca Project URL ve publishable/anon anahtarını içerir; secret/service_role anahtarı site dosyalarına konmaz.
 
 Müşteri sayfalarında yalnızca istatistik izni verildikten sonra rastgele tarayıcı kimliği oluşturulur ve kayıt gönderilir. İzin geri alınabilir; önizleme, yerel geliştirme ve tarayıcının izleme karşıtı tercihlerinde ölçüm yapılmaz. Rapor oturumu yalnızca açık sekmenin belleğinde tutulur. Yeni fonksiyon rapor erişimini Supabase oturumu ve işletmeci listesiyle doğrular.
 
