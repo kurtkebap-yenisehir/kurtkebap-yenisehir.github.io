@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "test": "node --test tests/shared.test.js",
+    "test:analytics": "node --test tests/analytics.test.js tests/analytics-report.test.js tests/analytics-admin.test.js supabase/functions/menu-analytics/validation.test.mjs",
     "test:browser": "playwright test"
   },
   "devDependencies": { "@playwright/test": "1.63.0" }

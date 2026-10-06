@@ -1,0 +1,4 @@
+# Only this new public collector skips the gateway JWT check. The report action
+# verifies its access token with Supabase Auth and the private owner allowlist.
+[functions.menu-analytics]
+verify_jwt = false

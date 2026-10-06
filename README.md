@@ -8,7 +8,7 @@ Bu depo işletme adresindeki tasarımı yayınlar. Güncel ürünler, fiyatlar v
 
 Eski müşteri adresi yeni işletme adresine yönlendirilir. Eski yönetim panelindeki taslak önizleme çalışmaya devam eder. Bu depoda GitHub Pages kaynağı **main → /(root)** olmalıdır.
 
-Telefonda ve bilgisayarda çalışan kategori filtreli, aranabilir bir menü ve GitHub üzerinden ürün yönetimi. Mevcut `menu.json` ürünleri ve `images/` fotoğrafları korunur. Sunucu, veritabanı veya ücretli yönetim hizmeti gerekmez.
+Telefonda ve bilgisayarda çalışan kategori filtreli, aranabilir bir menü ve GitHub üzerinden ürün yönetimi. Mevcut `menu.json` ürünleri ve `images/` fotoğrafları korunur. Menü ve fiyat yönetimi için sunucu veya veritabanı gerekmez; ziyaret istatistikleri ayrı Supabase servisiyle çalışır.
 
 - Müşteri menüsü: `index.html`
 - İşletme yönetimi: `admin.html`
@@ -54,6 +54,18 @@ API işlemleri [GitHub Git database](https://docs.github.com/en/rest/git) uçlar
 GitHub Pages ayarlarında **Deploy from a branch → main → /(root)** kullanılır. `assets/shared.js` içindeki `BRANCH` ve `REPOSITORY` yönetim panelinin yazdığı merkezi veri deposunu belirtir; işletme adresine geçişte mevcut anahtarı korumak için değiştirilmez. Eski QR kod müşteri menüsünün önceki adresine yöneliyorsa yönlendirme sayesinde yeniden basılması gerekmez. Yeni QR kod için `https://kurtkebap-yenisehir.github.io/` kullanılır.
 
 Ürün yönetimi yalnızca menü verisi ve yeni fotoğrafları yazar; tasarım kodunu değiştirmez. Yönetim ekranındaki başarı mesajı GitHub commit kaydını doğrular, Pages dağıtımının bittiğini doğrulamaz.
+
+## Ziyaret ve buton istatistikleri
+
+Yönetim ekranındaki **İstatistikler** bağlantısı `istatistikler.html` bölümünü açar. Bu bölüm işletme için tanımlanan Supabase uygulama kullanıcısının e-posta ve şifresiyle çalışır. Supabase hesabına giriş ile istatistik uygulamasına giriş ayrı hesaplardır. GitHub erişim anahtarı fiyat ve fotoğraf yayını içindir; istatistik servisine gönderilmez.
+
+Bugün, son 7 gün ve son 30 gün için tekil tarayıcılar, ziyaret oturumları, sayfa görüntülenmeleri ve buton etkileşimleri gösterilir. Menü, sipariş seçenekleri, üç sipariş platformu, Google yorum, Instagram ve telefon ayrı ölçülür. Tekil tarayıcılar kesin kişi sayısı değildir; sipariş bağlantısına tıklama tamamlanan sipariş sayısı değildir.
+
+Supabase projesini bağlamak için [kurulum rehberini](docs/SUPABASE-KURULUM.md) izleyin. `assets/analytics-config.js` içindeki Project URL ve publishable/anon anahtarı boşken ölçüm tamamen pasiftir. Servis ve yönetici hesabı kurulmadan bu alanları etkinleştirmeyin. Secret/service_role anahtarı site dosyalarına konmaz.
+
+Müşteri sayfalarında yalnızca istatistik izni verildikten sonra rastgele tarayıcı kimliği oluşturulur ve kayıt gönderilir. İzin geri alınabilir; önizleme, yerel geliştirme ve tarayıcının izleme karşıtı tercihlerinde ölçüm yapılmaz. Rapor oturumu yalnızca açık sekmenin belleğinde tutulur. Yeni fonksiyon rapor erişimini Supabase oturumu ve işletmeci listesiyle doğrular.
+
+Yeni istatistik kodunun kısa kontrolleri: `npm run test:analytics`. Mevcut menü ve fiyat testleri ayrıca çalıştırılabilir.
 
 ## Yerel önizleme
 

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="referrer" content="same-origin">
+  <meta name="theme-color" content="#263e31">
+  <title>İstatistikler · Kurt Kebap Yenişehir</title>
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/analytics-admin.css">
+  <script type="module" src="assets/analytics-admin.js"></script>
+</head>
+<body class="admin-body">
+  <div class="admin-wrap stats-wrap">
+    <header class="admin-header">
+      <a class="brand" href="index.html"><img src="assets/mark.svg" alt="" width="48" height="48"><span>KURT KEBAP<small>YENİŞEHİR</small></span></a>
+      <nav class="admin-header-actions" aria-label="İşletme paneli"><a class="button" href="admin.html">Menü yönetimi</a><a class="button" href="index.html" target="_blank" rel="noopener">Menüyü aç ↗</a></nav>
+    </header>
+    <main>
+      <div class="admin-heading"><div><p class="eyebrow">İŞLETME PANELİ</p><h1>Ziyaretler ve tıklamalar.</h1></div><p class="muted">Menünüzün ve ortak QR sayfanızın kullanımını görün.</p></div>
+      <p id="stats-notice" class="notice" role="status" aria-live="polite" hidden></p>
+      <section id="stats-setup" class="panel stats-intro" aria-labelledby="stats-setup-title" hidden>
+        <p class="eyebrow">İLK KURULUM</p><h2 id="stats-setup-title">İstatistik bağlantısı hazırlanıyor.</h2>
+        <p>Supabase projesi bağlandığında ziyaretler ve buton tıklamaları bu ekranda görünecek.</p>
+        <a class="button" href="https://supabase.com/dashboard" target="_blank" rel="noopener noreferrer">Supabase panelini aç ↗</a>
+      </section>
+      <section id="stats-signin" class="panel stats-signin" aria-labelledby="stats-signin-title" hidden>
+        <p class="eyebrow">İŞLETMECİ GİRİŞİ</p><h2 id="stats-signin-title">İstatistiklerinizi açın.</h2>
+        <p class="muted">İşletme için tanımlanan e-posta ve şifrenizle giriş yapın.</p>
+        <form id="stats-login-form">
+          <label class="field" for="stats-email">E-posta<input class="text-input" id="stats-email" type="email" autocomplete="username" required maxlength="254"></label>
+          <label class="field" for="stats-password">Şifre<input class="text-input" id="stats-password" type="password" autocomplete="current-password" required maxlength="256"></label>
+          <button class="button primary" id="stats-login-button" type="submit">İstatistiklere giriş yap</button>
+        </form>
+      </section>
+      <section id="stats-dashboard" aria-label="İşletme istatistikleri" hidden>
+        <div class="stats-toolbar">
+          <label class="field" for="stats-days">Tarih aralığı<select class="text-input" id="stats-days"><option value="1">Bugün</option><option value="7" selected>Son 7 gün</option><option value="30">Son 30 gün</option></select></label>
+          <div class="stats-actions"><button class="button" type="button" id="stats-refresh">Yenile</button><button class="text-button" type="button" id="stats-logout">Çıkış yap</button></div>
+        </div>
+        <div id="stats-results" hidden>
+          <p class="muted stats-period" id="stats-period"></p>
+          <div class="stats-metrics">
+            <article class="panel"><h2>Tekil ziyaretçi</h2><strong id="stats-visitors">—</strong><p class="muted">Seçilen dönemdeki farklı tarayıcılar</p></article>
+            <article class="panel"><h2>Ziyaret</h2><strong id="stats-sessions">—</strong><p class="muted">30 dakika içinde yapılan gezinmeler</p></article>
+            <article class="panel"><h2>Sayfa görüntülenmesi</h2><strong id="stats-page-views">—</strong><p class="muted">Menü ve ortak bağlantı sayfası</p></article>
+            <article class="panel"><h2>Buton etkileşimi</h2><strong id="stats-button-clicks">—</strong><p class="muted">Bağlantılar ve sipariş seçenekleri</p></article>
+          </div>
+          <p class="notice" id="stats-empty" hidden>Bu tarih aralığında henüz ziyaret kaydı yok. Yeni kayıtlar geldikçe rapor güncellenir.</p>
+          <div class="stats-columns">
+            <section class="panel stats-daily" aria-labelledby="stats-daily-title"><h2 id="stats-daily-title">Günlere göre ziyaretçiler</h2><div id="stats-chart" class="stats-chart" aria-hidden="true"></div><details class="help-details"><summary>Günlük sayıları göster</summary><div class="stats-table-wrap"><table class="stats-table"><thead><tr><th scope="col">Gün</th><th scope="col">Tekil ziyaretçi</th><th scope="col">Görüntülenme</th></tr></thead><tbody id="stats-daily-rows"></tbody></table></div></details></section>
+            <section class="panel" aria-labelledby="stats-events-title"><h2 id="stats-events-title">Hangi buton kullanıldı?</h2><div class="stats-table-wrap"><table class="stats-table"><thead><tr><th scope="col">Buton</th><th scope="col">Sayı</th></tr></thead><tbody id="stats-event-rows"></tbody></table></div></section>
+          </div>
+          <section class="panel stats-pages" aria-labelledby="stats-pages-title"><h2 id="stats-pages-title">Sayfa görüntülenmeleri</h2><table class="stats-table"><thead><tr><th scope="col">Sayfa</th><th scope="col">Sayı</th></tr></thead><tbody id="stats-page-rows"></tbody></table></section>
+          <p class="muted stats-explanation">Tekil ziyaretçi sayısı tarayıcı üzerinden hesaplanır. Aynı kişi farklı cihazlarla birden fazla sayılabilir. Kayıtlar istatistik izni veren ziyaretleri kapsar; bir sipariş bağlantısına tıklanması, siparişin tamamlandığını göstermez.</p>
+          <p class="muted stats-updated" id="stats-updated"></p>
+        </div>
+      </section>
+      <noscript><p class="notice error">İstatistikleri görüntülemek için tarayıcınızda JavaScript açık olmalıdır.</p></noscript>
+    </main>
+  </div>
+</body>
+</html>

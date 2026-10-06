@@ -9,14 +9,16 @@
   <link rel="canonical" href="https://kurtkebap-yenisehir.github.io/">
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/analytics-consent.css">
   <script type="module" src="assets/menu.js"></script>
+  <script type="module" src="assets/analytics.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#menu">Menüye geç</a>
   <div id="preview-banner" class="preview-banner" hidden>Taslak önizleme · Bu değişiklikler henüz yayınlanmadı</div>
   <header class="site-header wrap">
     <a class="brand" href="./" aria-label="Kurt Kebap ana sayfa"><img src="assets/mark.svg" alt="" width="48" height="48"><span>KURT KEBAP<small>YENİŞEHİR</small></span></a>
-    <a class="header-link" href="#menu">Menüyü keşfet <span aria-hidden="true">↗</span></a>
+    <a class="header-link" href="#menu" data-track="menu_open">Menüyü keşfet <span aria-hidden="true">↗</span></a>
   </header>
   <main>
     <section class="hero wrap" aria-labelledby="hero-title">
@@ -24,7 +26,7 @@
         <p class="eyebrow"><span class="small-line"></span> KURT KEBAP YENİŞEHİR</p>
         <h1 id="hero-title">Ateşin lezzeti.<br><em>Sofranın keyfi.</em></h1>
         <p class="hero-description">Mangalın başından sofranıza.<br>Kebaplarımızı, dürümlerimizi ve eşlikçilerini keşfedin.</p>
-        <a class="button primary hero-button" href="#menu">Menüyü incele <span aria-hidden="true">↓</span></a>
+        <a class="button primary hero-button" href="#menu" data-track="menu_open">Menüyü incele <span aria-hidden="true">↓</span></a>
         <p class="hero-note">Kebaplar <span>·</span> Dürümler <span>·</span> Mezeler</p>
       </div>
       <div class="hero-visual">
@@ -36,14 +38,14 @@
     <section class="order-section wrap" aria-labelledby="order-title">
       <div class="order-heading">
         <h2 id="order-title">Sipariş ver</h2>
-        <a class="order-phone" href="tel:+905319640123" aria-label="Telefonla sipariş: 0531 964 01 23"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="m7 3 3 5-3 3c1.5 3 3 4.5 6 6l3-3 5 3-1 4C10 22 2 14 3 4z"/></svg><span>0531 964 01 23</span></a>
+        <a class="order-phone" href="tel:+905319640123" data-track="phone_click" aria-label="Telefonla sipariş: 0531 964 01 23"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="m7 3 3 5-3 3c1.5 3 3 4.5 6 6l3-3 5 3-1 4C10 22 2 14 3 4z"/></svg><span>0531 964 01 23</span></a>
       </div>
-      <details class="order-disclosure">
+      <details class="order-disclosure" data-track="order_open">
         <summary class="order-summary"><span>Online sipariş ver</span><svg class="order-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></summary>
         <nav class="order-platforms" aria-label="Sipariş platformları">
-          <a class="order-platform" href="https://tgoyemek.com/restoranlar/332351"><span class="platform-dot platform-trendyol" aria-hidden="true"></span><span>Trendyol Go</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
-          <a class="order-platform" href="https://www.migros.com.tr/yemek/kurt-kebap-reyhanli-yenisehir-mah-st-2bc0f"><span class="platform-dot platform-migros" aria-hidden="true"></span><span>Migros Yemek</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
-          <a class="order-platform" href="https://www.yemeksepeti.com/restaurant/d3dk/kurt-kebap?utm_campaign=google_reserve_place_order_action_CH-SEO_"><span class="platform-dot platform-yemeksepeti" aria-hidden="true"></span><span>Yemeksepeti</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+          <a class="order-platform" href="https://tgoyemek.com/restoranlar/332351" data-track="trendyol_click"><span class="platform-dot platform-trendyol" aria-hidden="true"></span><span>Trendyol Go</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+          <a class="order-platform" href="https://www.migros.com.tr/yemek/kurt-kebap-reyhanli-yenisehir-mah-st-2bc0f" data-track="migros_click"><span class="platform-dot platform-migros" aria-hidden="true"></span><span>Migros Yemek</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+          <a class="order-platform" href="https://www.yemeksepeti.com/restaurant/d3dk/kurt-kebap?utm_campaign=google_reserve_place_order_action_CH-SEO_" data-track="yemeksepeti_click"><span class="platform-dot platform-yemeksepeti" aria-hidden="true"></span><span>Yemeksepeti</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
         </nav>
       </details>
     </section>
@@ -63,7 +65,7 @@
   </main>
   <footer class="site-footer wrap">
     <a class="brand" href="./"><img src="assets/mark.svg" alt="" width="36" height="36"><span>KURT KEBAP<small>YENİŞEHİR</small></span></a>
-    <address class="footer-contact"><span>Reyhanlı Devlet Hastanesi acil karşısı<br>Reyhanlı, Hatay</span><a href="tel:+905319640123">0531 964 01 23</a></address>
+    <address class="footer-contact"><span>Reyhanlı Devlet Hastanesi acil karşısı<br>Reyhanlı, Hatay</span><a href="tel:+905319640123" data-track="phone_click">0531 964 01 23</a></address>
     <a href="admin.html" class="management-link">Menü yönetimi <span aria-hidden="true">↗</span></a>
   </footer>
   <noscript><p class="empty-state">Menüyü görüntülemek için tarayıcınızda JavaScript'i etkinleştirin.</p></noscript>
