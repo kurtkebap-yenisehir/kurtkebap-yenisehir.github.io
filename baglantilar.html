@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#263e31">
-  <meta name="description" content="Kurt Kebap Yenişehir’in menüsünü keşfedin, Google’da deneyiminizi paylaşın ve Instagram’da bize katılın. Reyhanlı, Hatay.">
+  <meta name="description" content="Kurt Kebap Yenişehir menüsü, sipariş bağlantıları ve iletişim bilgileri. Reyhanlı, Hatay.">
   <title>Kurt Kebap Yenişehir · Hoş geldiniz</title>
   <link rel="canonical" href="https://kurtkebap-yenisehir.github.io/baglantilar.html">
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
@@ -32,14 +32,13 @@
     .brand-name { display: block; font-size: 15px; font-weight: 700; letter-spacing: 1.5px; line-height: 1.5; }
     .brand-name small { display: block; font-size: 8px; font-weight: 500; letter-spacing: 3.7px; }
     .location { margin: 0; font-size: 9px; line-height: 1.7; letter-spacing: 1.6px; text-align: right; }
-    .welcome { position: relative; padding-block: 32px 29px; }
+    .welcome { position: relative; padding-block: 27px 26px; }
     .eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; font-size: 9px; font-weight: 700; letter-spacing: 2px; }
     .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--copper); }
     h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(42px, 10.8vw, 55px); font-weight: 400; letter-spacing: -1.7px; line-height: 1.08; }
     h1 em { font-weight: 400; }
-    .intro { max-width: 310px; margin: 17px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
     .links { display: grid; gap: 12px; }
-    .menu-link { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; min-height: 160px; padding: 24px; background: var(--green); color: var(--cream); border: 1px solid var(--green); overflow: hidden; }
+    .menu-link { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; min-height: 146px; padding: 24px; background: var(--green); color: var(--cream); border: 1px solid var(--green); overflow: hidden; }
     .menu-link:focus-visible { outline-color: var(--green); }
     .menu-link:hover { background: #314d3c; }
     .menu-copy { position: relative; z-index: 1; min-width: 0; }
@@ -48,23 +47,32 @@
     .menu-description { display: block; margin-top: 8px; color: #d5ddcf; font-size: 11px; line-height: 1.6; }
     .menu-arrow { position: relative; z-index: 1; display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid #83917b; border-radius: 50%; flex-shrink: 0; margin-bottom: 2px; }
     .skewers { position: absolute; top: 16px; right: 25px; width: 75px; height: 82px; color: var(--copper); opacity: .72; pointer-events: none; }
-    .social-link { display: flex; align-items: center; gap: 16px; min-height: 87px; padding: 18px 20px; border: 1px solid var(--line); background: #fbf9f3; }
+    .order-section { margin-block: 25px; }
+    .order-section h2 { display: flex; align-items: center; gap: 16px; margin: 0 0 9px; font-family: Georgia, "Times New Roman", serif; font-size: 25px; font-weight: 400; letter-spacing: -.4px; }
+    .order-section h2::after { content: ""; height: 1px; background: var(--line); flex: 1; }
+    .order-platforms { display: grid; }
+    .order-platform { display: flex; align-items: center; gap: 12px; min-height: 57px; border-bottom: 1px solid var(--line); font-size: 14px; font-weight: 600; }
+    .order-platform:hover { background: #eeeee3; }
+    .order-platform > svg { width: 17px; height: 17px; margin-left: auto; }
+    .platform-dot { width: 8px; height: 8px; border-radius: 50%; margin-left: 7px; flex-shrink: 0; }
+    .platform-trendyol { background: #f27a1a; } .platform-migros { background: #ec6b15; } .platform-yemeksepeti { background: #ea0050; }
+    .social-link { display: flex; align-items: center; gap: 16px; min-height: 72px; padding: 14px 20px; border: 1px solid var(--line); background: #fbf9f3; }
     .social-link:hover { background: #eeeee3; border-color: #9da78f; }
     .social-icon { display: grid; place-items: center; width: 38px; height: 38px; flex-shrink: 0; }
     .social-copy { min-width: 0; flex: 1; }
     .social-title { display: block; font-size: 15px; font-weight: 600; line-height: 1.4; }
-    .social-description { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.55; }
     .social-arrow { width: 18px; height: 18px; }
     footer { margin-top: 28px; text-align: center; }
     .footer-rule { display: flex; align-items: center; justify-content: center; gap: 11px; margin-bottom: 16px; color: var(--copper); }
     .footer-rule::before, .footer-rule::after { content: ""; width: 32px; height: 1px; background: var(--line); }
     footer p { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 14px; line-height: 1.65; }
-    footer p + p { margin-top: 3px; font-family: Arial, Helvetica, sans-serif; color: var(--muted); font-size: 10px; }
+    .contact-phone { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 44px; font-size: 18px; font-weight: 600; letter-spacing: .4px; }
+    .contact-phone:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .contact-address { margin: 6px 0 17px; color: var(--muted); font-size: 12px; font-style: normal; line-height: 1.8; }
     @media (min-width: 600px) {
       .page { padding-block: 42px; }
-      .welcome { padding-block: 38px 32px; }
-      .menu-link { min-height: 174px; padding: 27px; }
-      .social-link { min-height: 92px; }
+      .welcome { padding-block: 35px 31px; }
+      .menu-link { min-height: 160px; padding: 27px; }
     }
     @media (max-width: 350px) {
       .page { width: calc(100% - 32px); }
@@ -100,9 +108,8 @@
       <section class="welcome" aria-labelledby="welcome-title">
         <p class="eyebrow">MANGALDAN SOFRANIZA</p>
         <h1 id="welcome-title">Soframıza<br><em>hoş geldiniz.</em></h1>
-        <p class="intro">Lezzetlerimizi keşfedin.<br>Güzel bir sofrada buluşalım.</p>
       </section>
-      <nav class="links" aria-label="Kurt Kebap bağlantıları">
+      <nav aria-label="Kurt Kebap menüsü">
         <a class="menu-link" href="https://kurtkebap-yenisehir.github.io/">
           <svg class="skewers" viewBox="0 0 80 88" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
             <path d="m20 78 34-68m-17 68L20 9"/>
@@ -112,25 +119,36 @@
           <span class="menu-copy">
             <span class="menu-eyebrow">MENÜMÜZ</span>
             <span class="menu-title">Menüyü aç</span>
-            <span class="menu-description">Kebaplar, dürümler ve mezeler.</span>
+            <span class="menu-description">Kebap · Dürüm · Meze</span>
           </span>
           <span class="menu-arrow" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></span>
         </a>
+      </nav>
+      <section class="order-section" aria-labelledby="order-title">
+        <h2 id="order-title">Sipariş ver</h2>
+        <nav class="order-platforms" aria-label="Sipariş platformları">
+          <a class="order-platform" href="https://tgoyemek.com/restoranlar/332351"><span class="platform-dot platform-trendyol" aria-hidden="true"></span><span>Trendyol Go</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+          <a class="order-platform" href="https://www.migros.com.tr/yemek/kurt-kebap-reyhanli-yenisehir-mah-st-2bc0f"><span class="platform-dot platform-migros" aria-hidden="true"></span><span>Migros Yemek</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+          <a class="order-platform" href="https://www.yemeksepeti.com/restaurant/d3dk/kurt-kebap?utm_campaign=google_reserve_place_order_action_CH-SEO_"><span class="platform-dot platform-yemeksepeti" aria-hidden="true"></span><span>Yemeksepeti</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+        </nav>
+      </section>
+      <nav class="links" aria-label="Yorum ve sosyal medya">
         <a class="social-link" href="https://search.google.com/local/writereview?placeid=ChIJm6F07d2dJRURDL5lCKtA2uI">
           <span class="social-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="m16 4 3.7 7.5 8.3 1.2-6 5.8 1.4 8.2-7.4-3.9-7.4 3.9 1.4-8.2-6-5.8 8.3-1.2z"/></svg></span>
-          <span class="social-copy"><span class="social-title">Google’da yorum yap</span><span class="social-description">Sofranızın hikâyesini paylaşın.</span></span>
+          <span class="social-copy"><span class="social-title">Google’da yorum yap</span></span>
           <svg class="social-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>
         </a>
         <a class="social-link" href="https://www.instagram.com/kurt_kebapyenisehir/">
           <span class="social-icon" aria-hidden="true"><svg width="27" height="27" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="22" height="22" rx="6"/><circle cx="16" cy="16" r="5.2"/><circle cx="23" cy="9" r="1" fill="currentColor" stroke="none"/></svg></span>
-          <span class="social-copy"><span class="social-title">Instagram</span><span class="social-description">Mangalın başından en taze kareler.</span></span>
+          <span class="social-copy"><span class="social-title">Instagram</span></span>
           <svg class="social-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>
         </a>
       </nav>
     </main>
     <footer>
       <div class="footer-rule" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="m6 0 1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
-      <p>Ateşin lezzeti, sofranın keyfi.</p>
+      <a class="contact-phone" href="tel:+905319640123" aria-label="Kurt Kebap’ı ara: 0531 964 01 23"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><path d="m7 3 3 5-3 3c1.5 3 3 4.5 6 6l3-3 5 3-1 4C10 22 2 14 3 4z"/></svg>0531 964 01 23</a>
+      <address class="contact-address">Reyhanlı Devlet Hastanesi acil karşısı<br>Reyhanlı, Hatay</address>
       <p>Afiyet olsun.</p>
     </footer>
   </div>
