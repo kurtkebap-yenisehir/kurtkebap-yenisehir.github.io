@@ -61,9 +61,9 @@ Yönetim ekranındaki **İstatistikler** bağlantısı veya [istatistik ekranı]
 
 Bugün, son 7 gün ve son 30 gün için tekil tarayıcılar, ziyaret oturumları, sayfa görüntülenmeleri ve buton etkileşimleri gösterilir. Menü, sipariş seçenekleri, üç sipariş platformu, Google yorum, Instagram ve telefon ayrı ölçülür. Tekil tarayıcılar kesin kişi sayısı değildir; sipariş bağlantısına tıklama tamamlanan sipariş sayısı değildir.
 
-İşletme projesi `loopwgeevnowvycojcss` ve sitenin açık bağlantı bilgileri kurulmuştur. Ölçümler yalnızca kurulumdan sonraki izinli ziyaretlerden oluşur; geçmiş trafik geriye dönük alınamaz. İlk kayıtlar gelene kadar raporlar sıfır gösterebilir. Kurulum ve servis güncellemeleri için [Supabase rehberini](docs/SUPABASE-KURULUM.md) kullanın. `assets/analytics-config.js` yalnızca Project URL ve publishable/anon anahtarını içerir; secret/service_role anahtarı site dosyalarına konmaz.
+İşletme projesi `loopwgeevnowvycojcss` ve sitenin açık bağlantı bilgileri kurulmuştur. Ziyaret ve buton ölçümleri kurulumdan sonra otomatik alınır; geçmiş trafik geriye dönük hesaplanamaz. İlk kayıtlar gelene kadar raporlar sıfır gösterebilir. Kurulum ve servis güncellemeleri için [Supabase rehberini](docs/SUPABASE-KURULUM.md) kullanın. `assets/analytics-config.js` yalnızca Project URL ve publishable/anon anahtarını içerir; secret/service_role anahtarı site dosyalarına konmaz.
 
-Müşteri sayfalarında yalnızca istatistik izni verildikten sonra rastgele tarayıcı kimliği oluşturulur ve kayıt gönderilir. İzin geri alınabilir; önizleme, yerel geliştirme ve tarayıcının izleme karşıtı tercihlerinde ölçüm yapılmaz. Rapor oturumu yalnızca açık sekmenin belleğinde tutulur. Yeni fonksiyon rapor erişimini Supabase oturumu ve işletmeci listesiyle doğrular.
+Müşteri sayfalarında izin penceresi açılmadan, rastgele tarayıcı/oturum kimlikleriyle sınırlı ziyaret ve tıklama verisi gönderilir. Önizleme, yerel geliştirme ve tarayıcının **Do Not Track (DNT)** veya **Global Privacy Control (GPC)** tercihlerinde ölçüm yapılmaz. Rapor oturumu yalnızca açık sekmenin belleğinde tutulur. Yeni fonksiyon rapor erişimini Supabase oturumu ve işletmeci listesiyle doğrular.
 
 Yeni istatistik kodunun kısa kontrolleri: `npm run test:analytics`. Mevcut menü ve fiyat testleri ayrıca çalıştırılabilir.
 

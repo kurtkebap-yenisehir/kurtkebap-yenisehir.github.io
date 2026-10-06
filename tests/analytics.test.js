@@ -54,19 +54,19 @@ test('browser identity survives genuine navigation and renews session after inac
   assert.notEqual(nextSession.session_id, first.session_id);
 });
 
-test('blocked storage still uses a stable in-memory identity and withdrawal clears it', () => {
+test('blocked storage uses stable memory identity and malformed stored records are replaced', () => {
   const blockedStorage = { getItem() { throw Error('blocked'); }, setItem() { throw Error('blocked'); }, removeItem() { throw Error('blocked'); } };
   const manager = createAnalyticsIdentity({ localStorage: blockedStorage, sessionStorage: blockedStorage, uuid: randomUUID });
   assert.deepEqual(manager.current(), manager.current());
-  manager.clear();
-  assert.equal(manager.current(), null);
   const localStorage = memoryStorage();
   const sessionStorage = memoryStorage();
+  localStorage.setItem(ANALYTICS_VISITOR_KEY, 'not-a-browser-uuid');
+  sessionStorage.setItem(ANALYTICS_SESSION_KEY, '{broken-json');
   const stored = createAnalyticsIdentity({ localStorage, sessionStorage, uuid: randomUUID });
-  stored.current();
-  stored.clear();
-  assert.equal(localStorage.getItem(ANALYTICS_VISITOR_KEY), null);
-  assert.equal(sessionStorage.getItem(ANALYTICS_SESSION_KEY), null);
+  const identity = stored.current();
+  assert.equal(localStorage.getItem(ANALYTICS_VISITOR_KEY), identity.visitor_id);
+  assert.equal(JSON.parse(sessionStorage.getItem(ANALYTICS_SESSION_KEY)).id, identity.session_id);
+  assert.notEqual(identity.visitor_id, 'not-a-browser-uuid');
 });
 
 test('events contain only permitted labels, paths and random identifiers', () => {
@@ -86,6 +86,7 @@ test('both pages label existing links without changing their destination', async
     for (const label of ['menu_open', 'order_open', 'trendyol_click', 'migros_click', 'yemeksepeti_click', 'phone_click']) assert.ok(labels.includes(label));
     assert.match(html, /href="tel:\+905319640123" data-track="phone_click"/);
     assert.match(html, /src="assets\/analytics.js"/);
+    assert.doesNotMatch(html, /analytics-consent|analytics-notice|analytics-preferences/);
   }
 });
 
@@ -100,52 +101,38 @@ test('unconfigured collector starts without reading browser, storage or DOM', as
   assert.equal(configReads, 1);
 });
 
-test('collector sends nothing before consent, preserves navigation and stops on withdrawal', async () => {
+test('collector starts automatically without UI, preserves navigation and respects privacy opt-outs', async () => {
   class Element {
-    constructor() { this.dataset = {}; this.listeners = {}; }
-    addEventListener(name, listener) { this.listeners[name] = listener; }
-    focus() {}
-    click() { this.listeners.click?.(); }
+    constructor() { this.dataset = {}; }
     closest() { return this; }
-    setAttribute() {}
   }
   class HTMLDetailsElement extends Element {}
-  const accept = new Element(); accept.dataset.consent = 'accepted';
-  const reject = new Element(); reject.dataset.consent = 'rejected';
-  const dismiss = new Element();
   const localStorage = memoryStorage();
   const sessionStorage = memoryStorage();
   const listeners = {};
   const windowListeners = {};
   const requests = [];
+  const navigator = {};
   const source = (await readFile(new URL('../assets/analytics.js', import.meta.url), 'utf8')).replace(/^import .*;\r?$/gm, '');
   runInNewContext(source, {
     ...analyticsShared, analyticsUuid: randomUUID, getAnalyticsConfig: () => config,
-    location, navigator: {}, Element, HTMLDetailsElement,
+    location, navigator, Element, HTMLDetailsElement,
     window: { localStorage, sessionStorage, addEventListener: (name, listener) => { windowListeners[name] = listener; } },
     document: {
-      createElement() {
-        const element = new Element();
-        element.querySelector = selector => selector.includes('accepted') ? accept : dismiss;
-        element.querySelectorAll = () => [accept, reject];
-        return element;
-      },
-      querySelector: () => ({ append() {} }), body: { append() {} },
+      createElement() { throw Error('Analytics must not insert a permission window or controls'); },
+      querySelector() { throw Error('Analytics must not change page controls'); },
       addEventListener: (name, listener) => { listeners[name] = listener; },
     },
     fetch: (url, options) => { requests.push({ url, ...options }); return Promise.resolve({ ok: true }); },
   });
+  assert.equal(requests.length, 1, 'page view is collected without visitor interaction');
+  assert.equal(JSON.parse(requests[0].body).event_name, 'page_view');
+  assert.ok(localStorage.getItem(ANALYTICS_VISITOR_KEY));
+  assert.ok(sessionStorage.getItem(ANALYTICS_SESSION_KEY));
+  assert.equal(windowListeners.pageshow, undefined, 'BFCache restore cannot duplicate the page view');
+  assert.equal(windowListeners.storage, undefined, 'old permission storage cannot change automatic measurement');
   const anchor = new Element(); anchor.dataset.track = 'trendyol_click';
   const click = { target: anchor, button: 0, defaultPrevented: false, preventDefault() { throw Error('navigation intercepted'); } };
-  listeners.click(click);
-  assert.equal(requests.length, 0);
-  assert.equal(localStorage.getItem(ANALYTICS_VISITOR_KEY), null);
-  assert.equal(sessionStorage.getItem(ANALYTICS_SESSION_KEY), null);
-  accept.click();
-  assert.equal(requests.length, 1);
-  assert.equal(JSON.parse(requests[0].body).event_name, 'page_view');
-  accept.click();
-  assert.equal(requests.length, 1, 'repeated consent cannot duplicate this document page view');
   listeners.click(click);
   assert.equal(requests.length, 2);
   assert.equal(JSON.parse(requests[1].body).event_name, 'trendyol_click');
@@ -159,14 +146,16 @@ test('collector sends nothing before consent, preserves navigation and stops on 
   detail.open = true;
   listeners.toggle({ target: detail });
   assert.equal(JSON.parse(requests[2].body).event_name, 'order_open');
-  reject.click();
+  navigator.globalPrivacyControl = true;
   listeners.click(click);
   assert.equal(requests.length, 3);
-  assert.equal(localStorage.getItem(ANALYTICS_VISITOR_KEY), null);
-  assert.equal(sessionStorage.getItem(ANALYTICS_SESSION_KEY), null);
-  accept.click();
-  assert.equal(requests.length, 3);
-  windowListeners.storage({ key: analyticsShared.ANALYTICS_CONSENT_KEY, newValue: 'rejected' });
+  navigator.globalPrivacyControl = false;
+  navigator.doNotTrack = '1';
   listeners.click(click);
-  assert.equal(requests.length, 3, 'another tab withdrawing consent stops requests');
+  assert.equal(requests.length, 3);
+  navigator.doNotTrack = '0';
+  listeners.click(click);
+  assert.equal(requests.length, 4);
+  assert.equal(requests.filter(request => JSON.parse(request.body).event_name === 'page_view').length, 1);
+  assert.ok(Object.keys(listeners).every(name => ['click', 'toggle'].includes(name)));
 });

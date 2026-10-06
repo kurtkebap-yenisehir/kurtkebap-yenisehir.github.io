@@ -11,7 +11,6 @@ export const EVENT_LABELS = Object.freeze({
 });
 
 export const TRACKED_PAGES = Object.freeze(['/', '/index.html', '/baglantilar.html']);
-export const ANALYTICS_CONSENT_KEY = 'kurt-kebap.analytics.consent.v1';
 export const ANALYTICS_VISITOR_KEY = 'kurt-kebap.analytics.visitor.v1';
 export const ANALYTICS_SESSION_KEY = 'kurt-kebap.analytics.session.v1';
 export const SESSION_TTL_MS = 30 * 60 * 1000;
@@ -40,7 +39,7 @@ function write(storage, key, value) {
   try { storage?.setItem(key, value); } catch { /* Continue with memory-only identity. */ }
 }
 
-// Construct only after permission; importing this module never accesses storage.
+// Construct only for an eligible production page; imports never access storage.
 export function createAnalyticsIdentity({ localStorage, sessionStorage, now = Date.now, uuid = analyticsUuid } = {}) {
   let visitorId = read(localStorage, ANALYTICS_VISITOR_KEY);
   if (!UUID.test(visitorId || '')) {
@@ -58,12 +57,6 @@ export function createAnalyticsIdentity({ localStorage, sessionStorage, now = Da
       session.lastSeen = time;
       write(sessionStorage, ANALYTICS_SESSION_KEY, JSON.stringify(session));
       return { visitor_id: visitorId, session_id: session.id };
-    },
-    clear() {
-      visitorId = null; session = null;
-      for (const [storage, key] of [[localStorage, ANALYTICS_VISITOR_KEY], [sessionStorage, ANALYTICS_SESSION_KEY]]) {
-        try { storage?.removeItem(key); } catch { /* No persistence when storage is unavailable. */ }
-      }
     },
   };
 }

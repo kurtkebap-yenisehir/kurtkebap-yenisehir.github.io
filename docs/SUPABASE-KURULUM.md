@@ -2,7 +2,7 @@
 
 Bu kurulum yalnızca ziyaret ve buton ölçümleri içindir. Fiyatlar ve ürün fotoğrafları mevcut GitHub sistemiyle kaydedilmeye devam eder. İstatistik ekranına **bu proje için oluşturulan uygulama kullanıcısının e-posta ve şifresiyle** girilir. Supabase Dashboard hesabınızın parolası veya GitHub erişim anahtarı bu giriş için kullanılmaz.
 
-**6 Ekim 2026 kurulum durumu:** İstatistik sistemi `loopwgeevnowvycojcss` projesine bağlıdır. Veritabanı şeması, `menu-analytics` servisi, yetkili işletmeci hesabı ve sitenin açık bağlantı bilgileri kurulmuştur. Yalnızca bu servisin **Verify JWT** kontrolü kapalıdır; rapor erişimi fonksiyon içinde Supabase oturumu ve `private.admins` listesiyle doğrulanır. İzin veren ziyaretçilerin yeni kayıtları ölçülür; eski ziyaretler geriye dönük hesaplanamaz.
+**6 Ekim 2026 kurulum durumu:** İstatistik sistemi `loopwgeevnowvycojcss` projesine bağlıdır. Veritabanı şeması, `menu-analytics` servisi, yetkili işletmeci hesabı ve sitenin açık bağlantı bilgileri kurulmuştur. Yalnızca bu servisin **Verify JWT** kontrolü kapalıdır; rapor erişimi fonksiyon içinde Supabase oturumu ve `private.admins` listesiyle doğrulanır. Ziyaret ve buton tıklamaları otomatik olarak ölçülür; eski ziyaretler geriye dönük hesaplanamaz.
 
 Günlük kullanım için yönetim panelindeki **İstatistikler** bağlantısını veya [istatistik ekranını](https://kurtkebap-yenisehir.github.io/istatistikler.html) açın, uygulama hesabınızla giriş yapıp **Bugün / Son 7 gün / Son 30 gün** dönemlerinden birini seçin. İlk kayıtlar gelene kadar sıfır görünmesi normaldir. Aşağıdaki adımlar yeniden kurulum ve bakım için saklanmıştır.
 
@@ -94,7 +94,9 @@ Yayın sonrası ortak QR sayfasını açın, bir sipariş platformuna tıklayın
 - Bugün, son 7 gün ve son 30 gün; takvim günleri **Europe/Istanbul** saatine göre hesaplanır.
 - Dönemdeki tekil ziyaretçi sayısı tüm dönemde benzersiz tarayıcı kimliklerinin sayısıdır; günlük tekil sayılar birbirine eklenmez.
 
-Tarayıcı kimliği, gerçek kişi sayısı değildir. Aynı kişinin başka cihazı veya temizlenmiş tarayıcı verileri yeni ziyaretçi sayılabilir. Reklam/izleme engelleyicileri, bağlantı hataları ve müşterinin ölçümü kapatması eksik kayıt oluşturabilir. Bir sipariş platformuna geçiş siparişin tamamlandığını göstermez.
+Ölçüm, müşteriye izin penceresi açılmadan otomatik çalışır. Yalnızca rastgele tarayıcı/oturum kimlikleri ve aşağıda belirtilen sınırlı olay verileri kullanılır. Tarayıcı **Do Not Track (DNT)** veya **Global Privacy Control (GPC)** tercihi bildirdiğinde, yerel geliştirmede ve taslak önizlemede kayıt gönderilmez.
+
+Tarayıcı kimliği, gerçek kişi sayısı değildir. Aynı kişinin başka cihazı veya temizlenmiş tarayıcı verileri yeni ziyaretçi sayılabilir. Reklam/izleme engelleyicileri, bağlantı hataları ve tarayıcının DNT/GPC tercihleri eksik kayıt oluşturabilir. Bir sipariş platformuna geçiş siparişin tamamlandığını göstermez.
 
 ## Veri sınırları ve bakım
 
