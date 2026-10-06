@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#263e31">
+  <meta name="description" content="Kurt Kebap Yenişehir’in menüsünü keşfedin, Google’da deneyiminizi paylaşın ve Instagram’da bize katılın. Reyhanlı, Hatay.">
+  <title>Kurt Kebap Yenişehir · Hoş geldiniz</title>
+  <link rel="canonical" href="https://kurtkebap-yenisehir.github.io/baglantilar.html">
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <style>
+    :root {
+      color-scheme: light;
+      --green: #263e31;
+      --cream: #f7f4ec;
+      --copper: #c79462;
+      --muted: #61665c;
+      --line: #d9dacd;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--green);
+      background: var(--cream);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-width: 0; }
+    a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+    a:focus-visible { outline: 3px solid var(--green); outline-offset: 5px; }
+    svg { display: block; flex-shrink: 0; }
+    .page { width: min(480px, calc(100% - 40px)); margin-inline: auto; padding-block: max(24px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-bottom)); }
+    .masthead { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 11px; min-width: 0; }
+    .brand-mark { width: 43px; height: 43px; }
+    .brand-name { display: block; font-size: 15px; font-weight: 700; letter-spacing: 1.5px; line-height: 1.5; }
+    .brand-name small { display: block; font-size: 8px; font-weight: 500; letter-spacing: 3.7px; }
+    .location { margin: 0; font-size: 9px; line-height: 1.7; letter-spacing: 1.6px; text-align: right; }
+    .welcome { position: relative; padding-block: 32px 29px; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; font-size: 9px; font-weight: 700; letter-spacing: 2px; }
+    .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--copper); }
+    h1 { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(42px, 10.8vw, 55px); font-weight: 400; letter-spacing: -1.7px; line-height: 1.08; }
+    h1 em { font-weight: 400; }
+    .intro { max-width: 310px; margin: 17px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .links { display: grid; gap: 12px; }
+    .menu-link { position: relative; display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; min-height: 160px; padding: 24px; background: var(--green); color: var(--cream); border: 1px solid var(--green); overflow: hidden; }
+    .menu-link:focus-visible { outline-color: var(--green); }
+    .menu-link:hover { background: #314d3c; }
+    .menu-copy { position: relative; z-index: 1; min-width: 0; }
+    .menu-eyebrow { display: block; margin-bottom: 18px; color: #e0b58c; font-size: 9px; font-weight: 700; letter-spacing: 2.1px; }
+    .menu-title { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 32px; font-weight: 400; letter-spacing: -.6px; line-height: 1.15; }
+    .menu-description { display: block; margin-top: 8px; color: #d5ddcf; font-size: 11px; line-height: 1.6; }
+    .menu-arrow { position: relative; z-index: 1; display: grid; place-items: center; width: 42px; height: 42px; border: 1px solid #83917b; border-radius: 50%; flex-shrink: 0; margin-bottom: 2px; }
+    .skewers { position: absolute; top: 16px; right: 25px; width: 75px; height: 82px; color: var(--copper); opacity: .72; pointer-events: none; }
+    .social-link { display: flex; align-items: center; gap: 16px; min-height: 87px; padding: 18px 20px; border: 1px solid var(--line); background: #fbf9f3; }
+    .social-link:hover { background: #eeeee3; border-color: #9da78f; }
+    .social-icon { display: grid; place-items: center; width: 38px; height: 38px; flex-shrink: 0; }
+    .social-copy { min-width: 0; flex: 1; }
+    .social-title { display: block; font-size: 15px; font-weight: 600; line-height: 1.4; }
+    .social-description { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; line-height: 1.55; }
+    .social-arrow { width: 18px; height: 18px; }
+    footer { margin-top: 28px; text-align: center; }
+    .footer-rule { display: flex; align-items: center; justify-content: center; gap: 11px; margin-bottom: 16px; color: var(--copper); }
+    .footer-rule::before, .footer-rule::after { content: ""; width: 32px; height: 1px; background: var(--line); }
+    footer p { margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: 14px; line-height: 1.65; }
+    footer p + p { margin-top: 3px; font-family: Arial, Helvetica, sans-serif; color: var(--muted); font-size: 10px; }
+    @media (min-width: 600px) {
+      .page { padding-block: 42px; }
+      .welcome { padding-block: 38px 32px; }
+      .menu-link { min-height: 174px; padding: 27px; }
+      .social-link { min-height: 92px; }
+    }
+    @media (max-width: 350px) {
+      .page { width: calc(100% - 32px); }
+      .masthead { gap: 10px; }
+      .brand-name { font-size: 14px; letter-spacing: 1px; }
+      .location { letter-spacing: 1px; }
+      .menu-link { padding: 21px 19px; gap: 12px; }
+      .menu-title { font-size: 29px; }
+      .social-link { padding-inline: 15px; gap: 10px; }
+      .social-title { font-size: 14px; }
+    }
+    @media (forced-colors: active) {
+      .menu-link, .social-link { border: 1px solid LinkText; }
+      .menu-arrow { border-color: LinkText; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="masthead">
+      <div class="brand" aria-label="Kurt Kebap Yenişehir">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="18" fill="#263e31"/>
+          <path d="M18 17v30m0-15 21-15M18 32l22 15" fill="none" stroke="#f7f4ec" stroke-width="5" stroke-linecap="square"/>
+          <path d="M44 16v12" stroke="#c79462" stroke-width="3"/>
+          <circle cx="44" cy="34" r="2" fill="#c79462"/>
+        </svg>
+        <span class="brand-name">KURT KEBAP<small>YENİŞEHİR</small></span>
+      </div>
+      <p class="location">REYHANLI<br>HATAY</p>
+    </header>
+    <main>
+      <section class="welcome" aria-labelledby="welcome-title">
+        <p class="eyebrow">MANGALDAN SOFRANIZA</p>
+        <h1 id="welcome-title">Soframıza<br><em>hoş geldiniz.</em></h1>
+        <p class="intro">Lezzetlerimizi keşfedin.<br>Güzel bir sofrada buluşalım.</p>
+      </section>
+      <nav class="links" aria-label="Kurt Kebap bağlantıları">
+        <a class="menu-link" href="https://kurtkebap-yenisehir.github.io/">
+          <svg class="skewers" viewBox="0 0 80 88" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="m20 78 34-68m-17 68L20 9"/>
+            <path d="m45 27 10 5-6 12-10-5zm-9 18 10 5-6 12-10-5zM20 27l11-3 4 13-11 3zm6 20 11-3 4 13-11 3z"/>
+            <path d="m18 81-5 5m24-5 4 5" stroke-linecap="round"/>
+          </svg>
+          <span class="menu-copy">
+            <span class="menu-eyebrow">MENÜMÜZ</span>
+            <span class="menu-title">Menüyü aç</span>
+            <span class="menu-description">Kebaplar, dürümler ve mezeler.</span>
+          </span>
+          <span class="menu-arrow" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 12h15m-6-6 6 6-6 6"/></svg></span>
+        </a>
+        <a class="social-link" href="https://search.google.com/local/writereview?placeid=ChIJm6F07d2dJRURDL5lCKtA2uI">
+          <span class="social-icon" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="m16 4 3.7 7.5 8.3 1.2-6 5.8 1.4 8.2-7.4-3.9-7.4 3.9 1.4-8.2-6-5.8 8.3-1.2z"/></svg></span>
+          <span class="social-copy"><span class="social-title">Google’da yorum yap</span><span class="social-description">Sofranızın hikâyesini paylaşın.</span></span>
+          <svg class="social-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>
+        </a>
+        <a class="social-link" href="https://www.instagram.com/kurt_kebapyenisehir/">
+          <span class="social-icon" aria-hidden="true"><svg width="27" height="27" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="5" width="22" height="22" rx="6"/><circle cx="16" cy="16" r="5.2"/><circle cx="23" cy="9" r="1" fill="currentColor" stroke="none"/></svg></span>
+          <span class="social-copy"><span class="social-title">Instagram</span><span class="social-description">Mangalın başından en taze kareler.</span></span>
+          <svg class="social-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg>
+        </a>
+      </nav>
+    </main>
+    <footer>
+      <div class="footer-rule" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="m6 0 1.6 4.4L12 6l-4.4 1.6L6 12 4.4 7.6 0 6l4.4-1.6z"/></svg></div>
+      <p>Ateşin lezzeti, sofranın keyfi.</p>
+      <p>Afiyet olsun.</p>
+    </footer>
+  </div>
+</body>
+</html>
