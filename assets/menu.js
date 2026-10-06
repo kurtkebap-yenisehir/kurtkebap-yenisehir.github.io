@@ -5,17 +5,44 @@ const status = document.querySelector('#menu-status');
 const search = document.querySelector('#search');
 const preview = new URLSearchParams(location.search).get('preview') === '1';
 let menu, selected = '', lastLoaded = 0, previewImages = {};
+
+const navigationDialog = document.querySelector('#site-navigation');
+const navigationToggles = document.querySelectorAll('[data-navigation-toggle]');
+for (const toggle of navigationToggles) {
+  toggle.addEventListener('click', () => {
+    navigationDialog.showModal();
+    for (const button of navigationToggles) button.setAttribute('aria-expanded', 'true');
+  });
+}
+navigationDialog.querySelector('[data-navigation-close]').addEventListener('click', () => navigationDialog.close());
+navigationDialog.addEventListener('close', () => {
+  for (const button of navigationToggles) button.setAttribute('aria-expanded', 'false');
+});
+navigationDialog.addEventListener('click', event => {
+  if (event.target.closest('a')) navigationDialog.close();
+  if (event.target === navigationDialog) {
+    const bounds = navigationDialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) navigationDialog.close();
+  }
+});
+
 function render() {
   const query = normalizeSearch(search.value.trim());
   const categories = sortedCategories(menu);
   const visible = query ? categories : [selected];
+  const categoryScroll = nav.scrollLeft;
   nav.replaceChildren();
   for (const category of categories) {
     const button = document.createElement('button'); button.type = 'button'; button.className = 'category-button'; button.textContent = category;
     button.setAttribute('aria-pressed', String(!query && category === selected));
-    button.addEventListener('click', () => { selected = category; search.value = ''; render(); });
+    button.addEventListener('click', () => {
+      const hadFocus = document.activeElement === button;
+      selected = category; search.value = ''; render();
+      if (hadFocus) [...nav.children].find(item => item.textContent === category)?.focus({ preventScroll: true });
+    });
     nav.append(button);
   }
+  nav.scrollLeft = categoryScroll;
   document.querySelector('#category-title').textContent = query ? 'Arama sonuçları' : selected;
   document.querySelector('#category-eyebrow').textContent = query ? 'MENÜDE ARA' : 'MENÜMÜZ';
   document.querySelector('#category-description').textContent = query ? `“${search.value.trim()}” için menümüzde bulunan lezzetler.` : categoryDescriptions[selected] || 'Menümüzden lezzetler.';

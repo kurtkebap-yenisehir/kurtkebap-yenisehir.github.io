@@ -1,0 +1,216 @@
+/* Customer menu. Admin/editor styles remain in styles.css. */
+html { scroll-padding-top: 0; }
+.public-menu { --ink: var(--brand-green); --paper: var(--brand-cream); --accent: var(--brand-copper); --muted: var(--brand-muted); --line: var(--brand-line); font-size: 15px; }
+.public-menu .wrap { width: min(1160px, calc(100% - 80px)); }
+.public-menu .brand-header { position: relative; overflow: hidden; background: radial-gradient(ellipse at 48% 10%, #254333, var(--brand-green) 72%); color: var(--brand-cream); }
+.public-menu .brand-header::before, .public-menu .brand-header::after,
+.public-menu .menu-masthead::before, .public-menu .menu-masthead::after { content: ''; position: absolute; width: 132px; height: 192px; background: url('botanical-v2.webp') center / contain no-repeat; opacity: .5; pointer-events: none; }
+.public-menu .brand-header::before { left: -28px; top: -66px; transform: rotate(62deg); }
+.public-menu .brand-header::after { right: -28px; top: -66px; transform: rotate(-62deg) scaleX(-1); }
+.public-menu .brand-header-inner { min-height: 122px; display: flex; align-items: center; justify-content: space-between; gap: 32px; position: relative; z-index: 1; }
+.public-menu .menu-brand { display: inline-flex; align-items: center; justify-content: center; gap: 14px; color: var(--brand-cream); }
+.public-menu .menu-brand > img { display: block; width: 35px; height: 44px; object-fit: contain; flex-shrink: 0; }
+.public-menu .menu-brand > span { font: 600 27px/1.15 var(--brand-serif); letter-spacing: 1.4px; }
+.public-menu .menu-brand small { display: block; margin-top: 8px; font: 500 11px/1.3 var(--brand-serif); letter-spacing: 5px; text-align: center; }
+.public-menu .brand-location { margin: 0 auto; font: 500 11px/1.5 var(--brand-serif); letter-spacing: 2.4px; }
+.public-menu .brand-location span { color: var(--brand-gold); margin-inline: 8px; font-size: 18px; }
+.public-menu .brand-location img { display: inline-block; width: 30px; height: 10px; vertical-align: middle; }
+.public-menu .navigation-toggle, .public-menu .navigation-close { display: inline-flex; align-items: center; justify-content: center; background: transparent; border: 0; color: var(--brand-cream); width: 48px; height: 48px; padding: 10px; flex-shrink: 0; border-radius: 50%; }
+.public-menu .navigation-toggle:hover { background: #ffffff10; }
+.public-menu .hero { padding-block: 65px 60px; gap: 52px; grid-template-columns: 1.05fr 1fr; }
+.public-menu .hero-copy { position: relative; isolation: isolate; overflow: clip; }
+.public-menu .hero-copy::before, .public-menu .hero-copy::after { content: ''; position: absolute; width: 180px; height: 275px; background: url('botanical-v2.webp') center / contain no-repeat; opacity: .17; pointer-events: none; z-index: -1; }
+.public-menu .hero-copy::before { top: -70px; left: -80px; transform: rotate(54deg); }
+.public-menu .hero-copy::after { right: -45px; bottom: -58px; transform: rotate(-40deg) scaleX(-1); }
+.public-menu .eyebrow { font-family: var(--brand-serif); font-size: 11px; letter-spacing: 2.4px; font-weight: 600; }
+.public-menu h1 { font-family: var(--brand-serif); font-size: clamp(45px, 4.7vw, 70px); letter-spacing: -2.6px; line-height: 1.12; margin-block: 24px 25px; color: var(--brand-green); }
+.public-menu h1 em { color: var(--brand-copper); font-weight: 500; }
+.public-menu .hero-description { font-size: 16px; line-height: 1.6; max-width: 370px; }
+.public-menu .hero-button { min-height: 65px; margin-top: 20px; padding: 16px 25px; border: 1px solid #254331; border-radius: 50px; background: linear-gradient(145deg, #284431, #102b22); color: var(--brand-cream); font: 500 21px/1.3 var(--brand-serif); gap: 23px; box-shadow: inset 0 1px #ffffff1a; }
+.public-menu .hero-button:hover { background: #2b4936; }
+.public-menu .hero-note { color: var(--brand-green); font: 500 15px/1.6 var(--brand-serif); letter-spacing: 1.3px; margin-top: 23px; }
+.public-menu .hero-note span { color: var(--brand-copper); margin-inline: 15px; }
+.public-menu .hero-visual { padding: 0; }
+.public-menu .hero-visual::before { display: none; }
+.public-menu .hero-photo { aspect-ratio: .94; width: 100%; object-fit: cover; object-position: center 60%; border-radius: 130px 12px 100px 12px; }
+.public-menu .hero-caption { left: -18px; bottom: 26px; padding: 19px 26px; font: 500 12px/1.9 var(--brand-serif); letter-spacing: 2px; background: #102d23f2; color: var(--brand-cream); box-shadow: none; }
+.public-menu .caption-line { height: 40px; background: var(--brand-gold); }
+.public-menu .order-section { padding-block: 29px 38px; border-top: 1px solid var(--brand-line); }
+.public-menu .order-heading { gap: 16px 24px; margin-bottom: 20px; }
+.public-menu .order-heading .eyebrow { margin: 0 0 7px; }
+.public-menu .order-heading h2 { font: 500 30px/1.3 var(--brand-serif); letter-spacing: -.7px; }
+.public-menu .order-phone { font-size: 15px; font-weight: 600; color: var(--brand-green); }
+.public-menu .order-summary { width: 100%; min-height: 62px; border-radius: 12px; background: #fffaf1; color: var(--brand-green); border: 1px solid var(--brand-line); padding: 15px 20px; font: 500 20px/1.3 var(--brand-serif); }
+.public-menu .order-summary > span { display: inline-flex; gap: 13px; align-items: center; }
+.public-menu .order-summary:hover { background: #f0e8d8; }
+.public-menu .order-disclosure[open] > .order-summary { border-radius: 12px 12px 0 0; background: var(--brand-green); color: var(--brand-cream); }
+.public-menu .order-platforms { gap: 12px; padding: 14px; margin-top: 0; border: 1px solid var(--brand-line); border-top: 0; border-radius: 0 0 12px 12px; background: #fbf6ec; }
+.public-menu .order-platform { border-radius: 9px; background: #fffcf6; gap: 13px; padding: 13px; font-size: 14px; font-weight: 700; }
+.public-menu .order-platform small { display: block; font-size: 11px; margin-top: 3px; font-weight: 400; }
+.public-menu .platform-mark { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; width: 42px; height: 42px; border-radius: 9px; color: #fff; font-size: 25px; font-weight: 800; line-height: 1; letter-spacing: -1px; }
+.public-menu .platform-trendyol { font-size: 24px; background: #f36c19; }
+.public-menu .platform-migros { background: #ff7615; }
+.public-menu .platform-yemeksepeti { background: #fa0053; }
+.public-menu .menu-topbar { background: var(--brand-cream); border: 0; backdrop-filter: none; z-index: 4; }
+.public-menu .menu-masthead { position: relative; overflow: hidden; background: radial-gradient(ellipse at 50% 0, #203e31, var(--brand-green) 75%); color: var(--brand-cream); }
+.public-menu .menu-masthead::before { width: 108px; height: 156px; left: -32px; top: -73px; transform: rotate(55deg); }
+.public-menu .menu-masthead::after { width: 108px; height: 156px; right: -32px; top: -73px; transform: rotate(-55deg) scaleX(-1); }
+.public-menu .menu-masthead-inner { min-height: 83px; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+.public-menu .compact-brand { gap: 11px; }
+.public-menu .compact-brand > img { width: 29px; height: 36px; }
+.public-menu .compact-brand > span { font-size: 21px; }
+.public-menu .compact-brand small { margin-top: 5px; letter-spacing: 4px; font-size: 9px; }
+.public-menu .menu-tools { padding-block: 0; border-bottom: 1px solid var(--brand-line); }
+.public-menu .category-nav { gap: 32px; width: 100%; }
+.public-menu .category-button { min-height: 58px; font-size: 14px; font-weight: 400; color: var(--brand-muted); }
+.public-menu .category-button[aria-pressed=true] { color: var(--brand-green); font-weight: 700; border-color: var(--brand-green); }
+.public-menu .menu-section { position: relative; padding-top: 24px; overflow: clip; }
+.public-menu .menu-section::before { content: ''; position: absolute; width: 150px; height: 225px; background: url('botanical-v2.webp') center / contain no-repeat; top: 70px; right: -15px; opacity: .2; transform: rotate(-37deg) scaleX(-1); pointer-events: none; }
+.public-menu .search-box { width: min(470px, 100%); margin-bottom: 27px; border-radius: 11px; background: #ffffff60; min-height: 56px; padding: 13px 17px; gap: 14px; }
+.public-menu .search-box input { flex: 1; width: 100%; font-size: 16px; }
+.public-menu .search-box > svg { color: #3c4841; flex-shrink: 0; }
+.public-menu .section-heading { position: relative; align-items: end; margin-bottom: 23px; }
+.public-menu .section-heading .eyebrow { margin-bottom: 6px; font-size: 12px; }
+.public-menu .section-heading h2 { font: 500 45px/1.15 var(--brand-serif); letter-spacing: -1.1px; color: var(--brand-green); }
+.public-menu .section-heading .muted { font-size: 14px; line-height: 1.6; margin-top: 10px; max-width: 670px; }
+.public-menu .product-count { font-size: 13px; padding-bottom: 3px; }
+.public-menu .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px; position: relative; }
+.public-menu .product-card { display: grid; grid-template-columns: 34% minmax(0, 1fr); align-items: stretch; border: 1px solid #ded4c4; border-radius: 12px; background: #fffcf6b8; }
+.public-menu .product-card:hover { transform: none; box-shadow: 0 5px 18px #102d2309; }
+.public-menu .product-photo { height: 100%; min-height: 146px; aspect-ratio: auto; object-fit: cover; }
+.public-menu .product-photo.drink { padding: 15px; background: #f4eee1; }
+.public-menu .product-body { padding: 17px 19px 12px; display: flex; flex-direction: column; min-width: 0; }
+.public-menu .product-body h3 { font: 600 21px/1.32 var(--brand-serif); color: var(--brand-green); letter-spacing: -.4px; overflow-wrap: normal; }
+.public-menu .product-description { font-size: 13px; line-height: 1.5; margin: 7px 0 10px; min-height: 0; }
+.public-menu .product-bottom { margin-top: auto; padding-top: 6px; border-color: #e9e0d2; gap: 8px; }
+.public-menu .product-price { font: 600 25px/1.3 var(--brand-serif); color: var(--brand-green); }
+.public-menu .product-price small { font: 500 14px/1.3 var(--brand-serif); margin-left: 4px; }
+.public-menu .product-category { font-size: 11px; color: var(--brand-copper); }
+.public-menu .menu-footnote { font-size: 12px; line-height: 1.8; margin-top: 28px; }
+.public-menu .empty-state { background: #fffcf660; font-size: 14px; }
+.public-menu .closing-note { gap: 26px; padding-block: 13px 35px; }
+.public-menu .closing-note p { font-size: 31px; line-height: 1.45; }
+.public-menu .menu-footer { color: var(--brand-cream); background: var(--brand-green); padding-top: 32px; }
+.public-menu .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 26px; }
+.public-menu .footer-contact { width: auto; align-items: flex-start; color: #ede6d7; font-size: 12px; gap: 12px 30px; }
+.public-menu .footer-contact a { color: inherit; font-size: 12px; font-weight: 500; display: block; min-height: 0; }
+.public-menu .footer-contact a:hover { text-decoration: underline; }
+.public-menu .footer-contact a span { color: #c6c8b8; }
+.public-menu .footer-hours { white-space: nowrap; }
+.public-menu .footer-hours strong { display: block; font-weight: 600; }
+.public-menu .footer-links { display: grid; gap: 12px; font-size: 11px; color: #c6c8b8; flex-shrink: 0; }
+.public-menu .footer-links .management-link { color: inherit; width: auto; text-align: left; }
+.public-menu .footer-goodbye { margin: 27px 0 0; padding: 18px 20px 25px; text-align: center; border-top: 1px solid #b9915038; color: #dfc69a; font: italic 500 23px/1.4 var(--brand-serif); }
+.public-menu .footer-goodbye span { font-style: normal; margin-right: 7px; }
+.public-menu .footer-goodbye > img { width: 30px; height: 10px; vertical-align: middle; margin-right: 7px; }
+.public-menu .navigation-dialog { width: min(430px, calc(100% - 32px)); border: 1px solid var(--brand-line); border-radius: 17px; padding: 24px; color: var(--brand-green); background: var(--brand-cream); box-shadow: 0 22px 90px #0004; }
+.public-menu .navigation-dialog::backdrop { background: #0c241cc4; backdrop-filter: blur(3px); }
+.public-menu .navigation-heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.public-menu .navigation-heading p { font: 600 23px/1.3 var(--brand-serif); margin: 0; }
+.public-menu .navigation-close { color: var(--brand-green); }
+.public-menu .navigation-dialog nav { display: grid; margin-top: 19px; }
+.public-menu .navigation-dialog nav a { min-height: 58px; padding: 13px 0; border-top: 1px solid var(--brand-line); display: flex; align-items: center; justify-content: space-between; font: 500 21px/1.3 var(--brand-serif); }
+.public-menu .navigation-dialog nav a span { color: var(--brand-copper); }
+.public-menu .navigation-hours { margin: 20px 0 0; color: var(--brand-muted); font-size: 13px; }
+.public-menu .navigation-hours span { display: block; margin-top: 5px; }
+@media (max-width: 1000px) {
+  .public-menu .wrap { width: calc(100% - 48px); }
+  .public-menu .hero { gap: 28px; }
+  .public-menu h1 { font-size: 48px; }
+  .public-menu .brand-location { margin: 0; }
+  .public-menu .product-card { grid-template-columns: 32% minmax(0, 1fr); }
+  .public-menu .product-body { padding: 13px; }
+  .public-menu .product-body h3 { font-size: 19px; }
+  .public-menu .product-description { font-size: 13px; }
+  .public-menu .footer-inner { flex-wrap: wrap; }
+  .public-menu .footer-contact { flex-wrap: wrap; }
+}
+@media (max-width: 760px) {
+  .public-menu .wrap { width: calc(100% - 36px); }
+  .public-menu .brand-header { border-radius: 0 0 50% 50% / 0 0 17% 17%; }
+  .public-menu .brand-header-inner { min-height: 162px; flex-direction: column; justify-content: center; gap: 0; padding-block: 13px 25px; }
+  .public-menu .brand-header .menu-brand { flex-direction: column; gap: 5px; }
+  .public-menu .brand-header .menu-brand > img { width: 27px; height: 32px; }
+  .public-menu .brand-header .menu-brand > span { font-size: 28px; text-align: center; }
+  .public-menu .brand-header .menu-brand small { margin-top: 5px; font-size: 11px; letter-spacing: 5px; }
+  .public-menu .brand-header .navigation-toggle { position: absolute; top: 54px; right: 0; }
+  .public-menu .brand-location { font-size: 11px; letter-spacing: 1.5px; margin-top: 8px; }
+  .public-menu .brand-location span { font-size: 16px; margin-inline: 5px; }
+  .public-menu .brand-header::before { width: 126px; height: 182px; left: -33px; top: -38px; transform: rotate(54deg); }
+  .public-menu .brand-header::after { width: 126px; height: 182px; right: -33px; top: -38px; transform: rotate(-54deg) scaleX(-1); }
+  .public-menu .hero { display: block; width: 100%; padding: 27px 0 0; }
+  .public-menu .hero-copy { padding-inline: 18px; text-align: center; }
+  .public-menu .hero-copy::before { width: 117px; height: 170px; top: -69px; left: -20px; transform: rotate(54deg); }
+  .public-menu .hero-copy::after { width: 116px; height: 175px; right: -14px; bottom: -42px; transform: rotate(-45deg) scaleX(-1); }
+  .public-menu .hero-copy > .eyebrow { font-size: 10px; justify-content: center; letter-spacing: 2px; }
+  .public-menu h1 { font-size: clamp(45px, 14.4vw, 73px); line-height: 1.05; letter-spacing: -2.5px; margin: 20px 0; white-space: nowrap; }
+  .public-menu .hero-description { font-size: 15.5px; line-height: 1.6; max-width: 324px; margin: 22px auto 0; }
+  .public-menu .hero-button { width: 280px; max-width: 100%; min-height: 61px; padding: 14px 23px; font-size: 21px; margin-top: 18px; gap: 21px; }
+  .public-menu .hero-button > svg { width: 22px; }
+  .public-menu .hero-note { font-size: 16px; letter-spacing: 1.1px; margin: 18px 0 22px; }
+  .public-menu .hero-note span { margin-inline: 14px; }
+  .public-menu .hero-visual { width: 100%; max-width: 760px; margin: 0; padding: 0; }
+  .public-menu .hero-photo { aspect-ratio: 1.3; border-radius: 40% 0 0 0 / 28% 0 0 0; object-position: center 60%; }
+  .public-menu .hero-caption { left: 0; bottom: 26px; padding: 13px 25px; font-size: 11px; gap: 17px; }
+  .public-menu .caption-line { height: 35px; }
+  .public-menu .order-section { padding-block: 28px; border-top: 0; }
+  .public-menu .order-heading { margin-bottom: 16px; gap: 9px; }
+  .public-menu .order-heading > div { width: 100%; }
+  .public-menu .order-heading h2 { font-size: 27px; }
+  .public-menu .order-phone { font-size: 14px; min-height: 36px; }
+  .public-menu .order-summary { font-size: 18px; min-height: 57px; padding: 13px 16px; }
+  .public-menu .order-platforms { grid-template-columns: 1fr; gap: 8px; padding: 11px; }
+  .public-menu .order-platform { min-height: 61px; font-size: 14px; padding: 10px 13px; }
+  .public-menu .menu-masthead-inner { min-height: 76px; }
+  .public-menu .menu-masthead .compact-brand { margin-left: 66px; }
+  .public-menu .category-nav { gap: 24px; }
+  .public-menu .category-button { font-size: 13px; min-height: 47px; }
+  .public-menu .menu-tools { display: block; }
+  .public-menu .menu-section { padding-top: 16px; }
+  .public-menu .search-box { width: 100%; min-height: 52px; margin: 0 0 24px; padding-inline: 14px; }
+  .public-menu .section-heading { gap: 10px; margin-bottom: 18px; }
+  .public-menu .section-heading h2 { font-size: 39px; }
+  .public-menu .section-heading .eyebrow { font-size: 11px; }
+  .public-menu .section-heading .muted { font-size: 13px; margin-top: 8px; }
+  .public-menu .product-count { font-size: 12px; }
+  .public-menu .menu-grid { grid-template-columns: 1fr; gap: 10px; }
+  .public-menu .product-card { grid-template-columns: 33% minmax(0, 1fr); border-radius: 10px; }
+  .public-menu .product-photo { min-height: 132px; }
+  .public-menu .product-body { padding: 11px 13px 8px; }
+  .public-menu .product-body h3 { font-size: 18px; line-height: 1.25; }
+  .public-menu .product-description { font-size: 13px; line-height: 1.5; margin: 6px 0 8px; }
+  .public-menu .product-price { font-size: 23px; }
+  .public-menu .product-price small { font-size: 12px; }
+  .public-menu .product-category { font-size: 10px; }
+  .public-menu .menu-footnote { font-size: 11px; margin-top: 23px; }
+  .public-menu .closing-note { gap: 18px; padding-block: 0 23px; }
+  .public-menu .closing-note p { font-size: 27px; }
+  .public-menu .menu-footer { padding-top: 26px; }
+  .public-menu .footer-inner { justify-content: center; gap: 24px; }
+  .public-menu .footer-contact { width: 100%; justify-content: center; text-align: center; flex-direction: column; align-items: center; gap: 14px; font-size: 13px; }
+  .public-menu .footer-contact a { font-size: 13px; }
+  .public-menu .footer-hours strong { display: inline; margin-left: 8px; }
+  .public-menu .footer-links { display: flex; gap: 30px; }
+}
+@media (max-width: 360px) {
+  .public-menu .wrap { width: calc(100% - 28px); }
+  .public-menu .brand-header .menu-brand > span { font-size: 26px; }
+  .public-menu .brand-header .navigation-toggle { right: -8px; }
+  .public-menu .hero-copy { padding-inline: 14px; }
+  .public-menu h1 { font-size: 14.4vw; letter-spacing: -2.4px; }
+  .public-menu .hero-copy > .eyebrow { font-size: 9px; letter-spacing: 1.5px; }
+  .public-menu .hero-description { font-size: 14px; }
+  .public-menu .hero-note { font-size: 15px; }
+  .public-menu .hero-note span { margin-inline: 12px; }
+  .public-menu .hero-button { font-size: 19px; gap: 19px; padding-inline: 20px; }
+  .public-menu .menu-masthead .compact-brand { margin-left: 22px; }
+  .public-menu .compact-brand > span { font-size: 19px; }
+  .public-menu .category-nav { gap: 21px; }
+  .public-menu .section-heading h2 { font-size: 35px; }
+  .public-menu .section-heading .muted { font-size: 11px; }
+  .public-menu .product-body { padding: 10px 11px 8px; }
+  .public-menu .product-body h3 { font-size: 17px; }
+  .public-menu .product-description { font-size: 12px; }
+  .public-menu .product-price { font-size: 22px; }
+  .public-menu .product-category { font-size: 9px; }
+}
