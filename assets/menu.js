@@ -5,6 +5,10 @@ const status = document.querySelector('#menu-status');
 const search = document.querySelector('#search');
 const preview = new URLSearchParams(location.search).get('preview') === '1';
 let menu, selected = '', lastLoaded = 0, previewImages = {};
+const menuCategories = menu => {
+  const categories = sortedCategories(menu);
+  return categories.includes('Dürümler') ? ['Dürümler', ...categories.filter(category => category !== 'Dürümler')] : categories;
+};
 
 const navigationDialog = document.querySelector('#site-navigation');
 const navigationToggles = document.querySelectorAll('[data-navigation-toggle]');
@@ -28,7 +32,7 @@ navigationDialog.addEventListener('click', event => {
 
 function render() {
   const query = normalizeSearch(search.value.trim());
-  const categories = sortedCategories(menu);
+  const categories = menuCategories(menu);
   const visible = query ? categories : [selected];
   const categoryScroll = nav.scrollLeft;
   nav.replaceChildren();
@@ -78,7 +82,7 @@ async function loadMenu() {
       data = await response.json();
     }
     menu = validateMenu(data);
-    if (!Object.hasOwn(menu, selected)) selected = sortedCategories(menu)[0];
+    if (!Object.hasOwn(menu, selected)) selected = menuCategories(menu)[0];
     lastLoaded = Date.now(); render();
   } catch {
     if (menu) return;
