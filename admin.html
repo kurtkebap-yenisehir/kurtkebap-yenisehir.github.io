@@ -9,7 +9,7 @@
   <title>Menü Yönetimi · Kurt Kebap Yenişehir</title>
   <link rel="stylesheet" href="assets/styles.css">
   <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
-  <script type="module" src="assets/admin.js"></script>
+  <script type="module" src="assets/admin.js?v=2"></script>
 </head>
 <body class="admin-body">
   <div class="admin-wrap">
@@ -38,7 +38,7 @@
         <section class="panel" aria-labelledby="draft-title"><p class="eyebrow">ÇALIŞMA ALANI</p><h2 id="draft-title">Önce düzenleyin.</h2><p class="muted">Düzenlemeler bu tarayıcıda taslak olarak saklanır. Müşterileriniz, GitHub'a kaydedilene kadar mevcut menüyü görür.</p><div class="admin-tools-footer"><button class="text-button" id="download-button" type="button">JSON yedeğini indir ↓</button><button class="text-button" id="reload-button" type="button">GitHub'daki son menüyü al</button><button class="text-button" id="reset-button" type="button">Taslağı sıfırla</button></div></section>
       </aside>
       <main class="panel" id="editor" aria-label="Ürün düzenleyici">
-        <div class="editor-toolbar"><div><h2>Ürünler</h2><p class="row-count" id="row-count">Menü yükleniyor…</p></div><button class="button primary" id="add-product" type="button">+ Yeni ürün</button></div>
+        <div class="editor-toolbar"><div><h2>Ürünler</h2><p class="row-count" id="row-count">Menü yükleniyor…</p></div><div><button class="button" id="add-category" type="button">+ Yeni kategori</button> <button class="button primary" id="add-product" type="button">+ Yeni ürün</button></div></div>
         <div class="editor-toolbar"><label class="search-box"><span class="sr-only">Ürün ara</span><input class="text-input" id="search" type="search" placeholder="Ürün veya açıklama ara…"></label><label><span class="sr-only">Kategori filtresi</span><select class="text-input" id="category-filter"><option value="">Tüm kategoriler</option></select></label></div>
         <details class="help-details"><summary>Toplu fiyat güncelle</summary><form id="bulk-form" class="bulk-controls"><label class="field">Kategori<select class="text-input" id="bulk-category"><option value="">Tüm kategoriler</option></select></label><label class="field">İşlem<select class="text-input" id="bulk-mode"><option value="percent">Yüzde ekle / çıkar</option><option value="amount">TL ekle / çıkar</option><option value="set">Fiyatı eşitle (TL)</option></select></label><label class="field">Değer<input class="text-input" id="bulk-value" type="text" inputmode="decimal" placeholder="Örn. 10 veya -10" required></label><button class="button" type="submit">Fiyatları uygula</button></form><p class="muted">Eksi değer indirim yapar. Gizlenen ürünler de seçilen kategorinin güncellemesine dahil olur.</p></details>
         <div class="editor-list" id="editor-list"></div>
@@ -56,6 +56,14 @@
       <label class="toggle-label"><input id="product-active" type="checkbox" checked> Menüde göster</label>
       <div class="photo-controls"><img id="product-photo" class="product-photo-preview" alt="Ürün fotoğrafı önizlemesi" hidden><label class="field" for="photo-file">Yeni fotoğraf yükle<input class="text-input" id="photo-file" type="file" accept="image/jpeg,image/png,image/webp"></label><p class="muted">Telefondan veya bilgisayardan JPG, PNG, WebP seçebilirsiniz (en fazla 15 MB). Fotoğraf menü için otomatik küçültülür.</p><label class="field" for="product-image">Veya fotoğraf adresi<input class="text-input" id="product-image" type="text" placeholder="images/fotograf.jpg veya https://…"></label><button class="text-button" type="button" id="remove-photo">Fotoğrafı kaldır</button><p class="muted" id="photo-status" role="status"></p></div>
       <div class="dialog-actions"><button class="button" type="button" id="cancel-product">Vazgeç</button><button class="button primary" type="submit" id="save-product">Taslağa ekle</button></div>
+    </form>
+  </dialog>
+  <dialog id="category-dialog" class="dialog" aria-labelledby="category-dialog-title">
+    <form id="category-form"><div class="editor-toolbar"><h2 class="dialog-title" id="category-dialog-title">Yeni kategori</h2><button class="dialog-close" type="button" id="close-category" aria-label="Kategori penceresini kapat">×</button></div>
+      <p class="muted">Kategoriye ilk ürününü eklediğinizde menüde görünür.</p>
+      <p class="error-text" id="category-error" role="alert" hidden></p>
+      <label class="field" for="new-category-name">Kategori adı<input class="text-input" id="new-category-name" maxlength="100" placeholder="Örn. Tatlılar" required></label>
+      <div class="dialog-actions"><button class="button" type="button" id="cancel-category">Vazgeç</button><button class="button primary" type="submit">İlk ürünü ekle</button></div>
     </form>
   </dialog>
   <dialog id="preview-dialog" class="dialog preview-dialog" aria-labelledby="preview-title"><div class="editor-toolbar"><h2 class="dialog-title" id="preview-title">Müşterinizin göreceği menü</h2><button class="dialog-close" type="button" id="close-preview" aria-label="Önizlemeyi kapat">×</button></div><p class="muted">Bu önizleme yalnızca taslağınızdır. Yayındaki menüyü değiştirmez.</p><iframe id="preview-frame" title="Menü taslağı önizlemesi"></iframe></dialog>

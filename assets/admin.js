@@ -78,6 +78,7 @@ function updateStatus() {
   $('download-button').disabled = busy || !menu;
   $('reset-button').disabled = busy || (!dirty && !rawPrices.size);
   $('add-product').disabled = busy || !menu || rawPrices.size > 0;
+  $('add-category').disabled = busy || !menu || rawPrices.size > 0;
   $('connect-button').disabled = busy || rawPrices.size > 0;
   $('bulk-form').querySelectorAll('input,select,button').forEach((element) => { element.disabled = busy || rawPrices.size > 0; });
   $('editor-list').querySelectorAll('button').forEach((element) => { element.disabled = busy || rawPrices.size > 0; });
@@ -392,6 +393,22 @@ function openProduct(category, index) {
   $('product-name').focus();
 }
 
+function closeCategory() { $('category-dialog').close(); }
+
+function startCategory(event) {
+  event.preventDefault();
+  if (busy || !menu || rawPrices.size) return;
+  const category = $('new-category-name').value.trim();
+  if (!category || ['__proto__', 'constructor', 'prototype'].includes(category) || sortedCategories(menu).some(name => name.toLocaleLowerCase('tr') === category.toLocaleLowerCase('tr'))) {
+    $('category-error').textContent = 'Yeni ve geçerli bir kategori adı yazın.';
+    $('category-error').hidden = false;
+    return;
+  }
+  closeCategory();
+  openProduct();
+  $('product-category').value = category;
+}
+
 function closeProduct() {
   uploadGeneration += 1;
   uploadingPhoto = false;
@@ -635,6 +652,16 @@ $('preview-button').addEventListener('click', preview);
 $('close-preview').addEventListener('click', () => $('preview-dialog').close());
 $('preview-dialog').addEventListener('close', () => { $('preview-frame').src = 'about:blank'; try { sessionStorage.removeItem(PREVIEW_KEY); } catch { /* No credential is stored. */ } });
 $('add-product').addEventListener('click', () => openProduct());
+$('add-category').addEventListener('click', () => {
+  if (busy || !menu || rawPrices.size) return;
+  $('new-category-name').value = '';
+  $('category-error').hidden = true;
+  $('category-dialog').showModal();
+  $('new-category-name').focus();
+});
+$('category-form').addEventListener('submit', startCategory);
+$('close-category').addEventListener('click', closeCategory);
+$('cancel-category').addEventListener('click', closeCategory);
 $('close-product').addEventListener('click', closeProduct);
 $('cancel-product').addEventListener('click', closeProduct);
 $('product-dialog').addEventListener('cancel', (event) => { event.preventDefault(); closeProduct(); });

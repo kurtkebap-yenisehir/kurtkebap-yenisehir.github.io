@@ -16,6 +16,19 @@ async function openAdmin(page) {
   await page.goto('/admin.html');
   await expect(page.locator('.editor-row')).toHaveCount(47);
 }
+
+test('new category is added to the draft with its first product', async ({ page }) => {
+  await openAdmin(page);
+  await page.getByRole('button', { name: '+ Yeni kategori' }).click();
+  await page.locator('#new-category-name').fill('Tatlılar');
+  await page.getByRole('button', { name: 'İlk ürünü ekle' }).click();
+  await expect(page.locator('#product-category')).toHaveValue('Tatlılar');
+  await page.locator('#product-name').fill('Sütlaç');
+  await page.locator('#product-price').fill('120');
+  await page.locator('#save-product').click();
+  await expect(page.locator('#category-filter option[value="Tatlılar"]')).toHaveCount(1);
+  expect((await draft(page)).menu.Tatlılar[0]).toMatchObject({ isim: 'Sütlaç', fiyat: '120 TL' });
+});
 async function draft(page) {
   return page.evaluate((key) => JSON.parse(localStorage.getItem(key)), DRAFT);
 }
